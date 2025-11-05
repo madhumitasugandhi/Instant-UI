@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | UPLYNK India</title>
+
+    <!-- Vendor CSS -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+/* =========================================================
+   ABOUT PAGE THEME (Scoped under .about-page)
+   Matches UPLYNK Home Page tone — Gradient, Fonts, Depth
+   ========================================================= */
+
+.about-page {
+  --accent-gradient: linear-gradient(90deg, #6918bf 0%, #3683f6 100%);
+  --primary-color: #2563EB;   /* Trust Blue (60%) */
+  --secondary-color: #F97316; /* Warm Accent Orange (30%) */
+  --accent-color: #10B981;    /* Success Green (10%) */
+  --text-dark: #191919;
+  --text-muted: #666;
+  --bg-light: #fafafa;
+  --radius: 1rem;
+  color: var(--text-dark);
+  font-family: "Raleway", sans-serif;
+  overflow-x: hidden;
+}
+
+/* ========= ANIMATIONS ========= */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* ---------- HERO SECTION ---------- */
+.about-page .about-hero {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 140px 0 100px;
+  text-align: center;
+  animation: fadeUp 1s ease-in-out both;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-page .about-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 40% 60%, rgba(255,255,255,0.1), transparent 70%);
+  z-index: 0;
+}
+
+.about-page .about-hero h1,
+.about-page .about-hero p {
+  position: relative;
+  z-index: 1;
+}
+
+.about-page .about-hero h1 {
+  font-weight: 800;
+  font-size: 3rem;
+  letter-spacing: -0.5px;
+}
+
+.about-page .about-hero .gradient-text {
+  background: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-page .about-hero p {
+  max-width: 750px;
+  margin: 20px auto 0;
+  font-size: 1.15rem;
+  opacity: 0.9;
+  animation: fadeUp 1.2s ease-in-out both;
+}
+
+/* ---------- OUR STORY ---------- */
+.about-page .our-story {
+  padding: 100px 0;
+}
+
+.about-page .our-story img {
+  border-radius: var(--radius);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  animation: zoomIn 1.2s ease both;
+}
+
+.about-page .our-story h2 {
+  font-weight: 700;
+  color: var(--text-dark);
+  animation: fadeUp 0.8s ease both;
+}
+
+.about-page .our-story .text-accent {
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-page .our-story p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: 1rem;
+  animation: fadeUp 1s ease both;
+}
+
+/* ---------- MISSION & VALUES ---------- */
+.about-page .mission {
+  background: var(--bg-light);
+  padding: 100px 0;
+}
+
+.about-page .mission .section-header {
+  animation: fadeUp 1s ease both;
+}
+
+.about-page .value-card { 
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+.about-page .value-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #6918bf;
+}
+
+.about-page .value-card i {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float 3s ease-in-out infinite;
+}
+
+.about-page .value-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(105,24,191,0.15);
+}
+
+/* ---------- LEADERSHIP ---------- */
+.about-page .leadership {
+  padding: 100px 0;
+}
+
+.about-page .leadership .team-img {
+  border: 4px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  animation: zoomIn 1s ease both;
+}
+
+.about-page .leadership .team-img:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* ---------- MILESTONES ---------- */
+.about-page .stats {
+  background: var(--accent-gradient);
+  color: #fff;
+  padding: 100px 0;
+  animation: fadeUp 1s ease both;
+}
+
+.about-page .stats h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  background: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- CTA ---------- */
+.about-page .cta {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  padding: 100px 0;
+  animation: fadeUp 1s ease both;
+}
+
+.about-page .cta h2 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.about-page .cta p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.about-page .btn-cta {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 12px 35px;
+  border-radius: 50px;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.about-page .btn-cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(105,24,191,0.3);
+}
+
+/* ---------- RESPONSIVENESS ---------- */
+@media (max-width: 992px) {
+  .about-page .about-hero h1 { font-size: 2.3rem; }
+  .about-page .our-story { text-align: center; }
+  .about-page .our-story img { margin-bottom: 30px; }
+}
+
+@media (max-width: 768px) {
+  .about-page .about-hero { padding: 100px 0 70px; }
+  .about-page .mission, .about-page .leadership, .about-page .stats, .about-page .cta {
+    padding: 70px 0;
+  }
+  .about-page .stats h2 { font-size: 2rem; }
+}
+
+@media (max-width: 576px) {
+  .about-page .value-card {
+    padding: 25px 15px;
+  }
+  .about-page .btn-cta {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}
+    </style>
+  </head>
+
+  <body class="about-page">
+
+    <!-- Hero Section -->
+    <section id="about-hero" class="about-hero section light-background text-center">
+      <div class="container">
+        <h1 class="display-5 fw-bold">
+          About <span class="gradient-text">UPLYNK India</span>
+        </h1>
+        <p class="lead mt-3">
+          Empowering Digital India through AI, connectivity, and innovation — building the nation’s largest
+          community-driven digital ecosystem.
+        </p>
+      </div>
+    </section>
+
+    <!-- Our Story -->
+    <section id="our-story" class="our-story section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <img src="assets/img/about/about-18.webp" class="img-fluid rounded-4 shadow" alt="UPLYNK Vision">
+          </div>
+          <div class="col-lg-6">
+            <h2 class="fw-bold mb-3">Our Story</h2>
+            <h5 class="text-accent fw-semibold mb-4">Connecting Bharat Digitally — One Community at a Time</h5>
+            <p>
+              Founded with a vision to unify India’s digital landscape, UPLYNK brings together communities,
+              creators, businesses, and institutions on one secure AI-powered platform. From job creation to
+              local networking and events, we’re redefining how India interacts online.
+            </p>
+            <p>
+              With deep personalization and regional language accessibility, UPLYNK aims to bridge the gap between
+              urban and rural connectivity while empowering every voice in the country.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Core Values -->
+    <section id="mission" class="mission section light-background py-5">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="fw-bold">Our Mission & Core Values</h2>
+          <p>We’re on a mission to create an inclusive, intelligent, and interconnected digital Bharat.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4">
+            <div class="value-card">
+              <i class="bi bi-lightbulb"></i>
+              <h5>Innovation</h5>
+              <p>Leveraging AI and data-driven technology to power smarter connections across India.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="value-card">
+              <i class="bi bi-people"></i>
+              <h5>Inclusivity</h5>
+              <p>Supporting multi-language access and equal digital participation for all regions and communities.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="value-card">
+              <i class="bi bi-shield-check"></i>
+              <h5>Trust & Security</h5>
+              <p>Ensuring verified profiles and robust data protection to maintain a safe online ecosystem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership -->
+    <section id="leadership" class="leadership section">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="fw-bold">Meet Our Leadership</h2>
+          <p>Guided by visionaries shaping the future of India’s digital connectivity.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4 text-center">
+            <img src="assets/img/person/person-f-10.webp" alt="Founder" class="img-fluid rounded-circle mb-3 team-img">
+            <h5 class="fw-bold">Rajesh Khanna</h5>
+            <p class="text-muted">Founder & CEO</p>
+          </div>
+          <div class="col-md-4 text-center">
+            <img src="assets/img/person/person-f-12.webp" alt="CTO" class="img-fluid rounded-circle mb-3 team-img">
+            <h5 class="fw-bold">Megha Sharma</h5>
+            <p class="text-muted">Chief Technology Officer</p>
+          </div>
+          <div class="col-md-4 text-center">
+            <img src="assets/img/person/person-f-5.webp" alt="COO" class="img-fluid rounded-circle mb-3 team-img">
+            <h5 class="fw-bold">Arjun Patel</h5>
+            <p class="text-muted">Chief Operations Officer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Milestones -->
+    <section id="milestones" class="stats section light-background py-5">
+      <div class="container">
+        <div class="section-header text-center mb-5">
+          <h2 class="fw-bold">Our Journey So Far</h2>
+          <p>UPLYNK’s growth reflects the collective strength of India’s digital transformation.</p>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-md-3">
+            <h2 class="gradient-text fw-bold">10M+</h2>
+            <p>Users Across India</p>
+          </div>
+          <div class="col-md-3">
+            <h2 class="gradient-text fw-bold">500+</h2>
+            <p>Enterprise Partners</p>
+          </div>
+          <div class="col-md-3">
+            <h2 class="gradient-text fw-bold">28</h2>
+            <p>States Connected</p>
+          </div>
+          <div class="col-md-3">
+            <h2 class="gradient-text fw-bold">70%</h2>
+            <p>Monthly Active Users</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="join" class="cta section text-center py-5">
+      <div class="container">
+        <h2>Be a Part of the Digital India Movement</h2>
+        <p class="mb-4">Join millions of users building the future of Bharat’s connected communities through UPLYNK.</p>
+        <a href="#" class="btn-cta">Join Now</a>
+      </div>
+    </section>
+
+  </body>
+</html>
