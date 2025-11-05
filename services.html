@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | UPLYNK India</title>
+
+    <!-- Vendor CSS -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+/* =========================================================
+   SERVICES PAGE THEME (matches About Page design)
+   ========================================================= */
+.services-page {
+  --accent-gradient: linear-gradient(90deg, #6918bf 0%, #3683f6 100%);
+  --primary-color: #2563EB;
+  --secondary-color: #F97316;
+  --accent-color: #10B981;
+  --text-dark: #191919;
+  --text-muted: #666;
+  --bg-light: #fafafa;
+  --radius: 1rem;
+  font-family: "Raleway", sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeUp { 0% {opacity:0;transform:translateY(40px);} 100% {opacity:1;transform:translateY(0);} }
+@keyframes zoomIn { 0% {opacity:0;transform:scale(0.8);} 100% {opacity:1;transform:scale(1);} }
+@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+
+/* ---------- HERO ---------- */
+.services-page .services-hero {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 140px 0 100px;
+  text-align: center;
+  animation: fadeUp 1s ease-in-out both;
+  position: relative;
+  overflow: hidden;
+}
+
+.services-page .services-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 60%, rgba(255,255,255,0.15), transparent 70%);
+}
+
+.services-page .services-hero h1 {
+  font-weight: 800;
+  font-size: 3rem;
+  letter-spacing: -0.5px;
+}
+
+.services-page .services-hero p {
+  max-width: 720px;
+  margin: 20px auto 0;
+  font-size: 1.15rem;
+  opacity: 0.95;
+}
+
+/* ---------- SERVICE INTRO ---------- */
+.services-page .service-intro {
+  padding: 100px 0;
+}
+
+.services-page .service-intro img {
+  border-radius: var(--radius);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  animation: zoomIn 1s ease both;
+}
+
+.services-page .service-intro h2 {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.services-page .service-intro p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* ---------- SERVICES GRID ---------- */
+.services-page .service-grid {
+  background: var(--bg-light);
+  padding: 100px 0;
+}
+
+.services-page .service-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 35px 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  text-align: center;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.services-page .service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(105,24,191,0.15);
+  border-top: 4px solid #6918bf;
+}
+
+.services-page .service-card i {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.services-page .service-card h5 {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.services-page .service-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.services-page .btn-learn {
+  display: inline-block;
+  margin-top: 15px;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.services-page .btn-learn:hover {
+  color: var(--secondary-color);
+}
+
+/* ---------- FEATURES / BENEFITS ---------- */
+.services-page .features {
+  padding: 100px 0;
+}
+
+.services-page .feature-box {
+  padding: 30px;
+  background: var(--bg-light);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.services-page .feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(105,24,191,0.15);
+}
+
+.services-page .feature-box i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+/* ---------- CTA ---------- */
+.services-page .cta {
+  background: var(--bg-light);
+  text-align: center;
+  padding: 100px 0;
+}
+
+.services-page .cta h2 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.services-page .cta p {
+  color: var(--text-muted);
+}
+
+.services-page .btn-cta {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 12px 35px;
+  border-radius: 50px;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.services-page .btn-cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(105,24,191,0.3);
+}
+
+/* ---------- RESPONSIVENESS ---------- */
+@media (max-width:992px){
+  .services-page .service-intro{text-align:center;}
+  .services-page .service-intro img{margin-bottom:30px;}
+  .services-page .services-hero h1{font-size:2.3rem;}
+}
+@media (max-width:768px){
+  .services-page .service-card{padding:25px;}
+}
+    </style>
+  </head>
+
+  <body class="services-page">
+
+    <!-- Hero Section -->
+    <section class="services-hero">
+      <div class="container">
+        <h1>Our Core Services</h1>
+        <p>Discover how UPLYNK India connects people, businesses, and communities through AI-powered digital modules.</p>
+      </div>
+    </section>
+
+    <!-- Service Intro -->
+    <section class="service-intro">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <img src="assets/img/about/about-18.webp" alt="UPLYNK Services" class="img-fluid rounded-4 shadow">
+          </div>
+          <div class="col-lg-6">
+            <h2>Empowering Bharat Through Digital Integration</h2>
+            <p>UPLYNK India unites communities and opportunities — from forums and classifieds to jobs, matrimony, news, and events. Each service is powered by artificial intelligence and designed to foster connection, trust, and growth in a multilingual ecosystem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="service-grid">
+      <div class="container text-center mb-5">
+        <h2 class="fw-bold">Explore Our Services</h2>
+        <p>Each UPLYNK module brings unique value to individuals and communities nationwide.</p>
+      </div>
+
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="service-card">
+              <i class="bi bi-chat-dots"></i>
+              <h5>Forums & Communities</h5>
+              <p>Engage with India’s most vibrant forums — share experiences, ask questions, and collaborate.</p>
+              <a href="forums.html" class="btn-learn">Learn More →</a>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card">
+              <i class="bi bi-bag"></i>
+              <h5>Classifieds Marketplace</h5>
+              <p>Buy, sell, and promote locally with AI-driven visibility for your ads and listings.</p>
+              <a href="classifieds.html" class="btn-learn">Learn More →</a>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card">
+              <i class="bi bi-briefcase"></i>
+              <h5>Jobs & Careers</h5>
+              <p>Discover career opportunities and connect with verified employers across industries.</p>
+              <a href="jobs.html" class="btn-learn">Learn More →</a>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card">
+              <i class="bi bi-heart"></i>
+              <h5>Matrimony</h5>
+              <p>Find compatible and verified profiles with smart AI-based matchmaking filters.</p>
+              <a href="matrimony.html" class="btn-learn">Learn More →</a>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-card">
+              <i class="bi bi-newspaper"></i>
+              <h5>News & Media</h5>
+              <p>Stay updated with real-time news, stories, and updates tailored to your region and interests.</p>
+              <a href="news.html" class="btn-learn">Learn More →</a>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-card">
+              <i class="bi bi-calendar-event"></i>
+              <h5>Events & Gatherings</h5>
+              <p>Host or attend events easily — cultural, social, or professional — in your region.</p>
+              <a href="events.html" class="btn-learn">Learn More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features / Benefits -->
+    <section class="features">
+      <div class="container text-center mb-5">
+        <h2 class="fw-bold">Why Choose UPLYNK India</h2>
+        <p>Our platform is designed with innovation, accessibility, and trust at its core.</p>
+      </div>
+      <div class="container">
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4">
+            <div class="feature-box">
+              <i class="bi bi-robot"></i>
+              <h5>AI-Driven Personalization</h5>
+              <p>Get content, jobs, and connections tailored uniquely for you using smart algorithms.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box">
+              <i class="bi bi-globe2"></i>
+              <h5>Multilingual Ecosystem</h5>
+              <p>Connect in your preferred Indian language — accessible across all regions of Bharat.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box">
+              <i class="bi bi-shield-check"></i>
+              <h5>Verified & Secure Platform</h5>
+              <p>Every interaction is backed by strong verification and data protection layers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container">
+        <h2>Join the Future of Connected Bharat</h2>
+        <p class="mb-4">Start your journey with UPLYNK India — connect, grow, and thrive digitally.</p>
+        <a href="signup.html" class="btn-cta">Get Started Now</a>
+      </div>
+    </section>
+
+  </body>
+</html>
