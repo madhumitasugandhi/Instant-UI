@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matrimony | Find Your Perfect Match</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+ <style>
+  :root {
+    --romance-rose: #db2777;
+    --trust-blue: #2563eb;
+    --soft-pink: #fde7f3;
+    --deep-rose: #c81e6e;
+    --text-dark: #1a1a1a;
+    --light-bg: #fff;
+    --gradient-love: linear-gradient(135deg, #db2777 0%, #f43f5e 100%);
+  }
+
+  .matrimonial-page {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--light-bg);
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  /* Navbar */
+  .matrimonial-nav {
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+  }
+
+  .matrimonial-navbar-brand span {
+    color: var(--romance-rose);
+    font-weight: 700;
+  }
+
+  .matrimonial-nav-link {
+    color: #333 !important;
+    font-weight: 500;
+    margin: 0 8px;
+  }
+
+  .matrimonial-nav-link:hover {
+    color: var(--romance-rose) !important;
+  }
+
+  .matrimonial-btn-login,
+  .matrimonial-btn-signup {
+    border-radius: 25px;
+    padding: 6px 18px;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .matrimonial-btn-login {
+    color: var(--romance-rose);
+    border: 2px solid var(--romance-rose);
+  }
+
+  .matrimonial-btn-login:hover {
+    background: var(--romance-rose);
+    color: #fff;
+  }
+
+  .matrimonial-btn-signup {
+    background: var(--romance-rose);
+    color: #fff;
+    border: none;
+  }
+
+  .matrimonial-btn-signup:hover {
+    transform: scale(1.05);
+    background: var(--deep-rose);
+  }
+
+  /* Hero Section */
+  .matrimonial-hero {
+    position: relative;
+    padding-top: 80px;
+    overflow: hidden;
+    background: linear-gradient(153deg, var(--light-bg) 55%, var(--soft-pink) 45%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Floating Waves */
+  .matrimonial-hero::before,
+  .matrimonial-hero::after {
+    content: "";
+    position: absolute;
+    width: 400%;
+    height: 200%;
+    bottom: 0;
+    left: 0;
+    background-repeat: repeat-x;
+    background-size: cover;
+    opacity: 0.12;
+    z-index: 1;
+  }
+
+  .matrimonial-hero::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23db2777' fill-opacity='0.2' d='M0,256L48,229.3C96,203,192,149,288,128C384,107,480,117,576,144C672,171,768,213,864,213.3C960,213,1056,171,1152,160C1248,149,1344,171,1392,181.3L1440,192L1440,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    animation: matrimonial-waveMove 14s linear infinite;
+  }
+
+  .matrimonial-hero::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f43f5e' fill-opacity='0.2' d='M0,128L60,133.3C120,139,240,149,360,176C480,203,600,245,720,229.3C840,213,960,139,1080,112C1200,85,1320,107,1380,117.3L1440,128L1440,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+    animation: matrimonial-waveMove2 20s linear infinite reverse;
+  }
+
+  @keyframes matrimonial-waveMove {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes matrimonial-waveMove2 {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-40%);
+    }
+  }
+
+  /* Floating hearts */
+  .matrimonial-heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--deep-rose);
+    transform: rotate(45deg);
+    animation: matrimonial-floatHeart 8s linear infinite;
+    opacity: 0.2;
+    z-index: 0;
+  }
+
+  .matrimonial-heart::before,
+  .matrimonial-heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--romance-rose);
+    border-radius: 50%;
+  }
+
+  .matrimonial-heart::before {
+    top: -10px;
+    left: 0;
+  }
+
+  .matrimonial-heart::after {
+    left: -10px;
+    top: 0;
+  }
+
+  @keyframes matrimonial-floatHeart {
+    0% {
+      transform: translateY(0) rotate(45deg);
+      opacity: 0.3;
+    }
+
+    100% {
+      transform: translateY(-800px) rotate(45deg);
+      opacity: 0;
+    }
+  }
+
+  /* Hero Content */
+  .matrimonial-hero-content {
+    position: relative;
+    z-index: 5;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 80px 0;
+  }
+
+  .matrimonial-hero-text {
+    flex: 1 1 45%;
+  }
+
+  .matrimonial-hero-text h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: var(--gradient-love);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .matrimonial-hero-text p {
+    color: #444;
+    margin: 15px 0 30px;
+    font-size: 1.1rem;
+  }
+
+  .matrimonial-finder-box {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4px);
+  }
+
+  .matrimonial-finder-box label {
+    font-weight: 600;
+    color: var(--romance-rose);
+  }
+
+  .matrimonial-btn-find {
+    background: var(--trust-blue);
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+
+  .matrimonial-btn-outline-danger {
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .matrimonial-btn-outline-danger:hover {
+    background-color: #f43f5e;
+    color: #fff;
+    border-color: #f43f5e;
+  }
+
+  .matrimonial-btn-find:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(219, 39, 119, 0.4);
+  }
+
+  .matrimonial-hero-illustration {
+    flex: 1 1 45%;
+    text-align: center;
+  }
+
+  .matrimonial-hero-illustration img {
+    width: 100%;
+    max-width: 520px;
+    animation: matrimonial-float 6s ease-in-out infinite;
+  }
+
+  @keyframes matrimonial-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  .matrimonial-carousel-item {
+    color: var(--text-dark);
+  }
+
+  .matrimonial-blockquote-footer {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--light-bg);
+    width: auto;
+    margin: 10px auto;
+    background: radial-gradient(circle at center,
+        var(--deep-rose) 0%,
+        var(--romance-rose) 25%,
+        var(--soft-pink) 90%);
+  }
+
+  /* Profiles */
+  .matrimonial-profiles {
+    padding: 100px 0;
+    text-align: center;
+  }
+
+  .matrimonial-profiles h2 {
+    background: var(--gradient-love);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    margin-bottom: 50px;
+  }
+
+  .matrimonial-profile-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .matrimonial-profile-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(219, 39, 119, 0.15);
+  }
+
+  .matrimonial-profile-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .matrimonial-profile-card h5 {
+    color: var(--trust-blue);
+    font-weight: 700;
+  }
+
+  /* Footer */
+  .matrimonial-footer {
+    background: var(--romance-rose);
+    color: #fff;
+    padding: 60px 0 40px;
+    margin: 0;
+  }
+
+  .matrimonial-footer a {
+    color: #fff;
+    opacity: 0.9;
+    text-decoration: none;
+  }
+
+  .matrimonial-footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 992px) {
+    .matrimonial-hero {
+      background: linear-gradient(to bottom, #fff 50%, var(--soft-pink) 50%);
+    }
+
+    .matrimonial-hero-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .matrimonial-hero-text,
+    .matrimonial-hero-illustration {
+      flex: 1 1 100%;
+    }
+  }
+
+  .matrimonial-hero-carousel {
+    flex: 1 1 45%;
+    text-align: center;
+  }
+
+  .matrimonial-hero-carousel .matrimonial-hero-img {
+    width: 100%;
+    max-width: 520px;
+    height: 420px;
+    object-fit: contain;
+    animation: matrimonial-float 4s ease-in-out infinite;
+  }
+
+  @keyframes matrimonial-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
+
+</head>
+
+<body>
+  <div class="matrimonial-page">
+
+    <!-- Navbar -->
+    <nav class="matrimonial-navbar navbar navbar-expand-lg px-4 py-3">
+      <a class="matrimonial-navbar-brand fw-bold" href="#">Matrimony<span>Match</span></a>
+      <button class="matrimonial-navbar-toggler navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#matrimonial-navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="matrimonial-navbarNav">
+        <ul class="matrimonial-navbar-nav navbar-nav mx-auto">
+          <li class="matrimonial-nav-item nav-item"><a href="#" class="matrimonial-nav-link nav-link">Home</a></li>
+          <li class="matrimonial-nav-item nav-item"><a href="#" class="matrimonial-nav-link nav-link">Profiles</a></li>
+          <li class="matrimonial-nav-item nav-item"><a href="#" class="matrimonial-nav-link nav-link">Stories</a></li>
+          <li class="matrimonial-nav-item nav-item"><a href="#" class="matrimonial-nav-link nav-link">Contact</a></li>
+        </ul>
+        <div class="d-flex">
+          <a href="#" class="matrimonial-btn-login btn-login me-2">Login</a>
+          <a href="#" class="matrimonial-btn-signup btn-signup">Sign Up</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="matrimonial-hero">
+      <!-- Floating Hearts -->
+      <div class="matrimonial-heart heart" style="left:10%; animation-delay:0s;"></div>
+      <div class="matrimonial-heart heart" style="left:30%; animation-delay:2s;"></div>
+      <div class="matrimonial-heart heart" style="left:60%; animation-delay:4s;"></div>
+      <div class="matrimonial-heart heart" style="left:80%; animation-delay:1s;"></div>
+
+      <div class="matrimonial-hero-content hero-content container">
+        <div class="matrimonial-hero-text hero-text">
+          <h1>Smart Matchmaking for a Modern Generation <i class="bi bi-heart-fill"></i></h1>
+          <p>
+            UPLYNK Matrimony combines the power of AI and human connection to help you find a partner who truly aligns
+            with your lifestyle, values, and dreams.
+          </p>
+
+          <ul class="mt-3 list-unstyled">
+            <li><i class="bi bi-heart-fill" style="color: var(--romance-rose);"></i> AI-powered compatibility matching
+            </li>
+            <li><i class="bi bi-phone-fill" style="color: var(--romance-rose);"></i> Seamless mobile experience</li>
+            <li><i class="bi bi-lock-fill" style="color: var(--romance-rose);"></i> Privacy-first, verified community
+            </li>
+          </ul>
+
+          <div class="mt-4">
+            <a href="#" class="matrimonial-btn-find btn-find">Find Your Match</a>
+            <a href="#" class="btn btn-outline-danger ms-3">View Success Stories</a>
+          </div>
+        </div>
+
+        <!-- Hero Carousel -->
+        <div class="matrimonial-hero-carousel hero-carousel flex-shrink-0">
+          <div id="matrimonial-storyCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/assets/img/matrimonial/matrimonial-hero.png" class="d-block w-100 matrimonial-hero-img hero-img" alt="Matrimony Image 1">
+              </div>
+              <div class="carousel-item">
+                <img src="/assets/img/matrimonial/matrimonial-hero2.png" class="d-block w-100 matrimonial-hero-img hero-img" alt="Matrimony Image 2">
+              </div>
+              <div class="carousel-item">
+                <img src="/assets/img/matrimonial/matrimonial-hero3.png" class="d-block w-100 matrimonial-hero-img hero-img" alt="Matrimony Image 3">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profiles -->
+    <section class="matrimonial-profiles">
+      <div class="container">
+        <h2>Recently Added Profiles</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card matrimonial-profile-card profile-card">
+              <img src="https://images.unsplash.com/photo-1614289371518-4c51c2e6e82e" alt="">
+              <div class="card-body">
+                <h5>Priya Sharma, 28</h5>
+                <p class="mb-0">Software Engineer, Mumbai</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card matrimonial-profile-card profile-card">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="">
+              <div class="card-body">
+                <h5>Rohit Verma, 31</h5>
+                <p class="mb-0">Entrepreneur, Delhi</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card matrimonial-profile-card profile-card">
+              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="">
+              <div class="card-body">
+                <h5>Neha Patel, 26</h5>
+                <p class="mb-0">Doctor, Ahmedabad</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="matrimonial-how-it-works py-5 text-center">
+      <div class="container">
+        <h2 class="fw-bold mb-5" style="background: var(--gradient-love); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          How It Works</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <i class="bi bi-person-heart" style="font-size:2.5rem;color:var(--trust-blue);"></i>
+            <h5 class="mt-3 fw-bold">1. Create Profile</h5>
+            <p>Build a genuine, verified profile and let your story shine beautifully.</p>
+          </div>
+          <div class="col-md-4">
+            <i class="bi bi-stars" style="font-size:2.5rem;color:var(--trust-blue);"></i>
+            <h5 class="mt-3 fw-bold">2. Get Matched</h5>
+            <p>Our AI recommends compatible matches based on personality and lifestyle.</p>
+          </div>
+          <div class="col-md-4">
+            <i class="bi bi-chat-heart" style="font-size:2.5rem;color:var(--trust-blue);"></i>
+            <h5 class="mt-3 fw-bold">3. Connect & Begin</h5>
+            <p>Start conversations that lead to trust, love, and lasting companionship.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="matrimonial-stories py-5 text-center" style="background: var(--soft-pink);">
+      <div class="container">
+        <h2 class="fw-bold mb-4" style="background: var(--gradient-love); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Real Love Stories 💕</h2>
+        <div id="matrimonial-storyCarousel2" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <blockquote class="blockquote">
+                <p>"We met through UPLYNK Matrimony — and within months, we knew it was forever ❤️"</p>
+                <footer class="blockquote-footer">Riya & Karan, Married in 2024</footer>
+              </blockquote>
+            </div>
+            <div class="carousel-item">
+              <blockquote class="blockquote">
+                <p>"I found not just a partner, but my best friend. UPLYNK truly changed my life!"</p>
+                <footer class="blockquote-footer">Ankit & Aisha</footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust & Safety -->
+    <section class="matrimonial-trust py-5 text-center">
+      <div class="container">
+        <h2 class="fw-bold mb-4" style="background: var(--gradient-love); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Trust & Safety</h2>
+        <p class="text-muted mb-5">Your privacy and safety are our top priorities. Every profile is verified with care.</p>
+        <div class="row justify-content-center g-4">
+          <div class="col-md-3">
+            <i class="bi bi-shield-lock" style="font-size:2.2rem;color:var(--trust-blue);"></i>
+            <h6 class="mt-3 fw-semibold">Verified Profiles</h6>
+          </div>
+          <div class="col-md-3">
+            <i class="bi bi-person-check" style="font-size:2.2rem;color:var(--trust-blue);"></i>
+            <h6 class="mt-3 fw-semibold">AI Authenticity Checks</h6>
+          </div>
+          <div class="col-md-3">
+            <i class="bi bi-headset" style="font-size:2.2rem;color:var(--trust-blue);"></i>
+            <h6 class="mt-3 fw-semibold">24/7 Support</h6>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="matrimonial-footer">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>About</h5>
+            <p>Helping people across India find love, trust, and meaningful relationships through advanced matchmaking.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact</h5>
+            <p>Email: info@matrimonymatch.in</p>
+            <p>Phone: +91 98765 43210</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Follow Us</h5>
+            <p>
+              <a href="#"><i class="fab fa-facebook me-3"></i></a>
+              <a href="#"><i class="fab fa-instagram me-3"></i></a>
+              <a href="#"><i class="fab fa-twitter me-3"></i></a>
+            </p>
+          </div>
+        </div>
+        <hr />
+        <p class="mt-3 mb-0">&copy; 2025 MatrimonyMatch. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
+</body>
+
+
+</html>
