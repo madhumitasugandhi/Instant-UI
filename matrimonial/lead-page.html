@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Matrimonial Profile Listing - Final UI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* Color Variables based on your theme */
+        :root {
+            --primary-blue: #2563EB;
+            --accent-orange: #F97316;
+            --success-green: #10B981;
+            --warm-pink: #DB2777; /* Prominent Matrimony Color */
+            --light-bg: #f8f9fa;
+            --text-muted: #6c757d;
+            --bg-hover: rgba(37, 99, 235, 0.05); /* Light blue for subtle hover */
+        }
+
+        body {
+            background-color: var(--light-bg);
+            padding-top: 80px; /* Space for enhanced fixed navbar */
+        }
+        
+        /* --- ENHANCED NAVIGATION BAR STYLES (Unchanged) --- */
+        .navbar-custom {
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .navbar-brand-text {
+            color: var(--primary-blue) !important;
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+        
+        .nav-link-premium {
+            color: #343a40 !important;
+            font-weight: 600;
+            margin: 0 8px;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link-premium::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--warm-pink); 
+            left: 50%;
+            bottom: -5px;
+            transition: width 0.3s ease-out, left 0.3s ease-out;
+        }
+
+        .nav-link-premium:hover {
+            color: var(--warm-pink) !important;
+        }
+
+        .nav-link-premium:hover::after, 
+        .nav-link-premium.active::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .btn-upgrade-premium {
+            background-color: var(--success-green);
+            color: white;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        .btn-upgrade-premium:hover {
+            background-color: #0d9467;
+            color: white;
+        }
+        
+        /* --- IMAGE RESPONSIVENESS FIX & REFINEMENTS --- */
+        
+        .text-warm-pink {
+            color: var(--warm-pink) !important;
+        }
+        
+        /* Profile Card Refinement */
+        .profile-card {
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: none;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); 
+        }
+
+        /* FIX: Ensures image container maintains aspect ratio and height */
+        .profile-image-container {
+            width: 100%;
+            height: 300px; /* Increased height slightly for better visual presence */
+            overflow: hidden;
+            position: relative;
+            border-bottom: 3px solid var(--warm-pink);
+            background-color: #e9ecef; /* Placeholder background */
+        }
+        
+        /* FIX: Image must cover the entire container without stretching */
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* KEY FIX: Ensures the image covers the area, cropping as necessary */
+            transition: transform 0.5s ease;
+            display: block; /* Ensures proper rendering */
+        }
+
+        .profile-card:hover .profile-image {
+            transform: scale(1.05); 
+        }
+        
+        .profile-info-list li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #f0f0f0; 
+        }
+        
+        .profile-info-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Sidebar Filter Refinement */
+        .filter-sidebar {
+            position: sticky;
+            top: 90px;
+        }
+        
+        .filter-card {
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: none;
+        }
+
+        .filter-title {
+            color: var(--primary-blue);
+            font-weight: 700;
+            border-bottom: 3px solid var(--bg-hover);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-select-filter {
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        /* Connect Button */
+        .btn-connect {
+            background-color: var(--warm-pink) !important;
+            border-color: var(--warm-pink) !important;
+            transition: background-color 0.2s;
+            font-weight: 700;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .filter-sidebar {
+                position: static;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* Further mobile optimization for cards (optional, but good UX) */
+        @media (max-width: 576px) {
+            .profile-image-container {
+                height: 200px; 
+            }
+            .profile-name {
+                font-size: 1.3rem; 
+            }
+            .btn-connect {
+                font-size: 0.9rem;
+                padding: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
+        <div class="container-fluid container-xl">
+            <a class="navbar-brand" href="#">
+                <span class="navbar-brand-text">MATRIMONY</span><span class="text-warm-pink">MATCH</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium active" aria-current="page" href="#"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium" href="#"><i class="fas fa-search me-1"></i> Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium" href="#"><i class="fas fa-inbox me-1"></i> Inbox <span class="badge bg-danger rounded-pill">3</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-premium" href="#"><i class="fas fa-heart me-1 text-warm-pink"></i> Matches</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-sm btn-upgrade-premium me-3">
+                        <i class="fas fa-gem me-1"></i> Upgrade to Premium
+                    </button>
+                    <div class="dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/profile.png" alt="Profile" width="32" height="32" class="rounded-circle border border-2 border-primary">
+                        </a>
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">My Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container-xl py-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="filter-sidebar">
+                    <div class="card p-4 filter-card">
+                        <h5 class="filter-title"><i class="fas fa-filter me-2 text-primary-blue"></i> Refine Search</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Religion</label>
+                            <select class="form-select form-select-filter">
+                                <option>Hindu</option>
+                                <option>Muslim</option>
+                                <option>Christian</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Age Range</label>
+                            <div class="d-flex gap-2">
+                                <select class="form-select form-select-filter"><option>25</option><option>30</option></select>
+                                <select class="form-select form-select-filter"><option>30</option><option>35</option></select>
+                            </div>
+                        </div>
+
+                         <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Education</label>
+                            <select class="form-select form-select-filter">
+                                <option>Bachelors</option>
+                                <option>Masters</option>
+                                <option>PhD</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label small fw-semibold text-muted">Annual Income</label>
+                            <select class="form-select form-select-filter">
+                                <option>Above 10 Lakh</option>
+                                <option>Above 20 Lakh</option>
+                                <option>Above 50 Lakh</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary w-100" style="background-color: var(--primary-blue);">
+                            <i class="fas fa-search me-1"></i> Search Matches
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
+                <h3 class="fw-bold mb-4">Showing *24* Matches based on your Preferences</h3>
+                
+                <div class="row g-4">
+                    
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card profile-card">
+                            <div class="profile-image-container position-relative">
+                                <img src="/profile1.jpeg" class="profile-image" alt="Match Photo">
+                                <span class="badge badge-verified position-absolute top-0 start-0 m-2 bg-success"><i class="fas fa-shield-alt me-1"></i> Verified</span>
+                            </div>
+                            <div class="card-body p-4">
+                                <h5 class="profile-name mb-1">Priya Sharma, 28</h5>
+                                <p class="card-text small text-warm-pink fw-semibold">ID: MS1234567</p>
+                                
+                                <ul class="list-unstyled small mb-3 profile-info-list">
+                                    <li><i class="fas fa-map-marker-alt me-2 text-primary-blue"></i> Mumbai, India</li>
+                                    <li><i class="fas fa-graduation-cap me-2 text-primary-blue"></i> M.Tech, Software Engineer</li>
+                                    <li><i class="fas fa-money-bill-wave me-2 text-primary-blue"></i> ₹25 Lakh+ Annually</li>
+                                    <li><i class="fas fa-compact-disc me-2 text-primary-blue"></i> Hobbies: Reading, Travel</li>
+                                </ul>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-lg btn-connect text-white">
+                                        <i class="fas fa-heart me-2"></i> Connect Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card profile-card">
+                            <div class="profile-image-container position-relative">
+                                <img src="/profile.png" class="profile-image" alt="Match Photo">
+                                <span class="badge badge-verified position-absolute top-0 start-0 m-2 bg-success"><i class="fas fa-shield-alt me-1"></i> Verified</span>
+                            </div>
+                            <div class="card-body p-4">
+                                <h5 class="profile-name mb-1">Rohan Verma, 31</h5>
+                                <p class="card-text small text-warm-pink fw-semibold">ID: MS1234568</p>
+                                
+                                <ul class="list-unstyled small mb-3 profile-info-list">
+                                    <li><i class="fas fa-map-marker-alt me-2 text-primary-blue"></i> Bangalore, India</li>
+                                    <li><i class="fas fa-graduation-cap me-2 text-primary-blue"></i> MBA, Business Owner</li>
+                                    <li><i class="fas fa-money-bill-wave me-2 text-primary-blue"></i> ₹50 Lakh+ Annually</li>
+                                    <li><i class="fas fa-compact-disc me-2 text-primary-blue"></i> Hobbies: Fitness, Gaming</li>
+                                </ul>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-lg btn-connect text-white">
+                                        <i class="fas fa-heart me-2"></i> Connect Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card profile-card" style="opacity: 0.9;">
+                            <div class="profile-image-container position-relative">
+                                <img src="https://via.placeholder.com/600x400/F97316/FFFFFF?text=Anjali+Rao" class="profile-image" alt="Match Photo">
+                                <span class="badge badge-verified position-absolute top-0 start-0 m-2 bg-success"><i class="fas fa-shield-alt me-1"></i> Verified</span>
+                            </div>
+                            <div class="card-body p-4">
+                                <h5 class="profile-name mb-1">Anjali Rao, 26</h5>
+                                <p class="card-text small text-warm-pink fw-semibold">ID: MS1234569</p>
+                                
+                                <ul class="list-unstyled small mb-3 profile-info-list">
+                                    <li><i class="fas fa-map-marker-alt me-2 text-primary-blue"></i> New Delhi, India</li>
+                                    <li><i class="fas fa-graduation-cap me-2 text-primary-blue"></i> B.Sc, Academician</li>
+                                    <li><i class="fas fa-money-bill-wave me-2 text-primary-blue"></i> ₹15 Lakh+ Annually</li>
+                                    <li><i class="fas fa-compact-disc me-2 text-primary-blue"></i> Hobbies: Cooking, Writing</li>
+                                </ul>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-lg btn-connect text-white">
+                                        <i class="fas fa-heart me-2"></i> Connect Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-md-6"><div class="card profile-card" style="opacity: 0.7;"><div class="profile-image-container position-relative"><img src="https://via.placeholder.com/600x400/6c757d/FFFFFF?text=Deepak" class="profile-image"><span class="badge badge-verified position-absolute top-0 start-0 m-2 bg-success"><i class="fas fa-shield-alt me-1"></i> Verified</span></div><div class="card-body p-4"><h5 class="profile-name mb-1">Deepak, 30</h5><p class="card-text small text-warm-pink fw-semibold">ID: MS1234570</p><ul class="list-unstyled small mb-3 profile-info-list"><li><i class="fas fa-map-marker-alt me-2 text-primary-blue"></i> Pune, India</li><li><i class="fas fa-graduation-cap me-2 text-primary-blue"></i> Architect</li></ul><div class="d-grid"><button class="btn btn-lg btn-connect text-white">Connect Now</button></div></div></div></div>
+                    <div class="col-xl-4 col-md-6"><div class="card profile-card" style="opacity: 0.7;"><div class="profile-image-container position-relative"><img src="https://via.placeholder.com/600x400/2563EB/FFFFFF?text=Sneha" class="profile-image"><span class="badge badge-verified position-absolute top-0 start-0 m-2 bg-success"><i class="fas fa-shield-alt me-1"></i> Verified</span></div><div class="card-body p-4"><h5 class="profile-name mb-1">Sneha, 27</h5><p class="card-text small text-warm-pink fw-semibold">ID: MS1234571</p><ul class="list-unstyled small mb-3 profile-info-list"><li><i class="fas fa-map-marker-alt me-2 text-primary-blue"></i> Hyderabad, India</li><li><i class="fas fa-graduation-cap me-2 text-primary-blue"></i> Doctor</li></ul><div class="d-grid"><button class="btn btn-lg btn-connect text-white">Connect Now</button></div></div></div></div>
+                    <div class="col-xl-4 col-md-6"><div class="card profile-card" style="opacity: 0.7;"><div class="profile-image-container position-relative"><img src="https://via.placeholder.com/600x400/DB2777/FFFFFF?text=Vikram" class="profile-image"><span class="badge badge-verified position-absolute top-0 start-0 m-2 bg-success"><i class="fas fa-shield-alt me-1"></i> Verified</span></div><div class="card-body p-4"><h5 class="profile-name mb-1">Vikram, 34</h5><p class="card-text small text-warm-pink fw-semibold">ID: MS1234572</p><ul class="list-unstyled small mb-3 profile-info-list"><li><i class="fas fa-map-marker-alt me-2 text-primary-blue"></i> US Citizen</li><li><i class="fas fa-graduation-cap me-2 text-primary-blue"></i> Finance Manager</li></ul><div class="d-grid"><button class="btn btn-lg btn-connect text-white">Connect Now</button></div></div></div></div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
