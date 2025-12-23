@@ -215,14 +215,14 @@
         /* 1. Hero Section */
         .companies-hero {
             padding: 80px 0;
-            background-color: var(--surface-color);
+            background-color: var(--primary-blue);
             text-align: center;
             border-bottom: 1px solid var(--border-color);
         }
 
         /* 2. Search & Filters */
         .filter-bar {
-            background-color: var(--bg-color);
+            background-color: transparent;
             padding: 20px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
@@ -671,8 +671,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <h1 class="mb-3" style="color: var(--text-main);">Discover Best Companies</h1>
-                    <p class="mb-4" style="color: var(--text-secondary);">
+                    <h1 class="mb-3 text-white">Discover Best Companies</h1>
+                    <p class="mb-4 text-white">
                         Find the best places to work based on reviews, salaries, and company culture.
                     </p>
 
@@ -680,9 +680,9 @@
                         <form action="#" method="GET">
                             <div class="row g-3 align-items-center">
 
-                                <div class="col-md-5">
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-transparent border-end-0"
+                                <div class="col-md-5 ">
+                                    <div class="input-group py-3">
+                                        <span class="input-group-text border-end-0"
                                             style="border-color: var(--border-color);">
                                             <i class="bi bi-search" style="color: var(--text-muted);"></i>
                                         </span>
@@ -710,7 +710,7 @@
 
                                 <div class="col-md-2">
                                     <button type="submit" class="btn w-100 fw-bold"
-                                        style="background-color: var(--primary-blue); color: #fff;">
+                                        style="background-color: var(--brand-orange); color: #fff;">
                                         Find
                                     </button>
                                 </div>
@@ -725,14 +725,14 @@
 
     <section class="section-padding">
         <div class="container">
-            <h3 class="mb-4">Featured Companies <span class="text-warning"><i class="bi bi-star-fill"></i></span></h3>
+            <h3 class="mb-4">Featured Companies </h3>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="company-card featured">
                         <span class="featured-badge">Premium</span>
                         <div class="company-logo"><i class="bi bi-google"></i></div>
                         <h5>Google</h5>
-                        <p class="small text-muted mb-2">Technology • Mountain View</p>
+                        <p class="small --text-muted mb-2">Technology • Mountain View</p>
                         <p class="small">Organizing the world's information.</p>
                         <div class="company-actions">
                             <span class="open-jobs">45 Open Jobs</span>
@@ -770,7 +770,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="company-card featured">
                         <span class="featured-badge">MNC</span>
-                        <div class="company-logo" style="color: #000;">TCS</div>
+                        <div class="company-logo" style="color: var(--brand-orange);">TCS</div>
                         <h5>TCS</h5>
                         <p class="small text-muted mb-2">IT • Mumbai</p>
                         <p class="small">Building on belief for the future.</p>
@@ -797,7 +797,7 @@
                             </div>
                             <h2 class="mb-2">Microsoft</h2>
                             <div class="rating-badge mb-3">
-                                <i class="bi bi-star-fill"></i> 4.8 | <span class="text-muted">Technology</span>
+                                <i class="bi bi-star-fill"></i> 4.8 | <span class="--text-muted">Technology</span>
                             </div>
                             <p class="mb-4">"Our mission is to empower every person and every organization on the planet
                                 to achieve more."</p>
@@ -983,28 +983,28 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2>Why Work With These Companies?</h2>
-                <p class="text-muted">We verify every employer to ensure a safe career growth.</p>
+                <p class="--text-muted">We verify every employer to ensure a safe career growth.</p>
             </div>
             <div class="row g-4 text-center">
                 <div class="col-md-4">
                     <div class="trust-item">
                         <div class="trust-icon"><i class="bi bi-patch-check-fill"></i></div>
                         <h5>Verified Employers</h5>
-                        <p class="small text-muted">Every company is vetted for authenticity.</p>
+                        <p class="small --text-muted">Every company is vetted for authenticity.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="trust-item">
                         <div class="trust-icon"><i class="bi bi-graph-up-arrow"></i></div>
                         <h5>Career Growth</h5>
-                        <p class="small text-muted">Opportunities that accelerate your career.</p>
+                        <p class="small --text-muted">Opportunities that accelerate your career.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="trust-item">
                         <div class="trust-icon"><i class="bi bi-people-fill"></i></div>
                         <h5>Trusted by Millions</h5>
-                        <p class="small text-muted">Join thousands of job seekers finding roles daily.</p>
+                        <p class="small --text-muted">Join thousands of job seekers finding roles daily.</p>
                     </div>
                 </div>
             </div>
@@ -1014,7 +1014,7 @@
     <section id="employer-cta" class="section-padding">
         <div class="container">
             <div class="employer-cta-section">
-                <h2 class="mb-3">Are You Hiring? Find the Right Talent Faster</h2>
+                <h2 class="mb-3 text-white">Are You Hiring? Find the Right Talent Faster</h2>
                 <p class="text-white">Connect with millions of verified candidates instantly.</p>
 
                 <ul class="cta-list">
@@ -1043,7 +1043,7 @@
                                 Center's filters!"</h4>
                             <div class="mt-4">
                                 <h6>Anjali P.</h6>
-                                <small class="text-muted">Software Engineer</small>
+                                <small class="--text-muted">Software Engineer</small>
                             </div>
                         </div>
                     </div>
@@ -1054,7 +1054,7 @@
                                 at Amazon."</h4>
                             <div class="mt-4">
                                 <h6>Rahul K.</h6>
-                                <small class="text-muted">Product Manager</small>
+                                <small class="--text-muted">Product Manager</small>
                             </div>
                         </div>
                     </div>
@@ -1079,16 +1079,18 @@
 
                 <div class="col-lg-4 col-md-6 col-12 mb-4 footer-brand">
                     <h4>CAREER CENTER</h4>
-                    <p class="text-muted">Empowering Global Talent through AI-driven connectivity, innovation, and
+                    <p class="--text-muted">Empowering Global Talent through AI-driven connectivity, innovation, and
                         community growth.</p>
 
                     <div class="footer-contact-item mt-4">
-                        <strong>Phone:</strong> +91 9022577005
+                        <i class="bi bi-telephone-fill"></i> +91 9022577005
                     </div>
                     <div class="footer-contact-item">
-                        <strong>Email:</strong><br>
-                        <a href="mailto:support@careercenter.com">support@careercenter.com</a>
-                        <a href="mailto:info@careercenter.com">info@careercenter.com</a>
+                        <i class="bi bi-envelope-fill"></i><br>
+                        <a href="mailto:support@uplynkindia.com">support@uplynkindia.com</a><br>
+                        <a href="mailto:info@uplynkindia.com">info@uplynkindia.com</a><br>
+                        <a href="mailto:grievance@uplynkindia.com">grievance@uplynkindia.com</a><br>
+                        <a href="mailto:refunds@uplynkindia.com">refunds@uplynkindia.com</a><br>
                     </div>
                 </div>
 
@@ -1098,6 +1100,7 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li><a href="companies.html">Companies</a></li>
                     </ul>
                 </div>
 
@@ -1124,8 +1127,8 @@
 
             </div>
 
-            <div class="mt-4 pt-4 text-start border-top">
-                <small class="text-muted">© 2025 CAREER CENTER. Powered by Uplynk Networks Pvt. Ltd.</small>
+            <div class="mt-4 pt-4 text-center border-top">
+                <small class="--text-muted">© 2025 CAREER CENTER. Powered by Uplynk Networks Pvt. Ltd.</small>
             </div>
         </div>
     </footer>
