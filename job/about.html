@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CAREER CENTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* --- COPIED COLOR PALETTE --- */
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --surface-color: #f9fafb;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --primary-blue: #2563EB;
+            --success-green: #10b981;
+            --brand-orange: #F97316;
+            --brand-orange-hover: #ea580c;
+            --dark-strip-bg: #000000;
+            --hover-border: #1a1289;
+            --hover-bg: #c2cefb;
+            --hover-text: #1a1289;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --footer-social-bg: #e0f2fe;
+            --footer-social-color: #0284c7;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+            --primary-blue: #3b82f6;
+            --success-green: #34d399;
+            --brand-orange: #fb923c;
+            --brand-orange-hover: #f97316;
+            --dark-strip-bg: #1e293b;
+            --hover-border: #94adf8;
+            --hover-bg: #180a45;
+            --hover-text: #94adf8;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --footer-social-bg: #334155;
+            --footer-social-color: #38bdf8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 { color: var(--text-main); font-weight: 700; }
+        p { color: var(--text-muted); line-height: 1.6; }
+
+        /* --- NAVBAR STYLES (Keep existing) --- */
+        .navbar { background-color: var(--bg-color); border-bottom: 1px solid var(--border-color); padding: 12px 0; transition: background-color 0.3s; z-index: 1000; }
+        .navbar-brand { font-weight: 800; font-size: 1.5rem; color: var(--primary-blue) !important; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; text-transform: uppercase; }
+        .navbar-nav .nav-link { color: var(--text-muted) !important; font-weight: 500; margin: 0 10px; font-size: 0.95rem; transition: color 0.2s; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--text-main) !important; font-weight: 600; }
+        .dropdown-menu-scrollable { max-height: 500px; overflow-y: auto; width: 280px; }
+        .dropdown-header { color: var(--primary-blue); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-top: 10px; }
+        .dropdown-item { color: var(--text-muted); font-size: 0.9rem; padding: 6px 20px; }
+        .dropdown-item:hover { background-color: var(--surface-color); color: var(--text-main); }
+        .btn-nav-outline-blue { color: var(--primary-blue); border: 1px solid var(--primary-blue); background: transparent; font-weight: 600; border-radius: 6px; padding: 8px 16px; }
+        .btn-nav-outline-blue:hover { background-color: var(--primary-blue); color: #fff; }
+        .btn-nav-outline-green { color: var(--success-green); border: 1px solid var(--success-green); background: transparent; font-weight: 600; border-radius: 6px; padding: 8px 16px; }
+        .btn-nav-outline-green:hover { background-color: var(--success-green); color: #fff; }
+        .btn-nav-orange { background-color: var(--brand-orange); color: #fff; border: 1px solid var(--brand-orange); font-weight: 600; border-radius: 6px; padding: 8px 16px; display: flex; align-items: center; gap: 6px; }
+        .btn-nav-orange:hover { background-color: var(--brand-orange-hover); color: #fff; }
+
+        /* --- ABOUT PAGE SPECIFIC STYLES --- */
+        .page-header-section {
+            padding: 40px 0 60px 0;
+            text-align: center;
+            background-color: var(--primary-blue);
+            border-bottom: 1px solid var(--border-color);
+            
+        }
+        
+        .section-padding { padding: 80px 0; }
+        
+        /* Mission Image */
+        .mission-img-container {
+            position: relative;
+        }
+        .mission-img {
+            border-radius: 16px;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            box-shadow: var(--card-shadow);
+        }
+        
+        /* Stats Box Overlay */
+        .stats-overlay {
+            position: absolute;
+            bottom: -30px;
+            right: 30px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            max-width: 250px;
+        }
+        
+        /* Value Cards */
+        .value-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            border-radius: 16px;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: var(--card-shadow);
+        }
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--brand-orange);
+            margin-bottom: 25px;
+        }
+
+        /* Team Section */
+        .team-card {
+            text-align: center;
+            background-color: var(--bg-color);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        .team-card:hover {
+            box-shadow: var(--card-shadow);
+        }
+        .team-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--surface-color);
+        }
+        .team-role {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* --- FOOTER STYLES --- */
+        .footer-links-section { border-top: 1px solid var(--border-color); padding: 80px 0 20px 0; background-color: var(--surface-color); }
+        .footer-brand h4 { font-weight: 800; margin-bottom: 15px; color: var(--primary-blue); }
+        .footer-brand p { font-size: 0.95rem; margin-bottom: 20px; max-width: 90%; }
+        .footer-contact-item { margin-bottom: 12px; font-size: 0.95rem; }
+        .footer-contact-item strong { color: var(--text-main); margin-right: 5px; }
+        .footer-contact-item a { color: var(--text-muted); text-decoration: none; display: inline-block; word-break: break-all; }
+        .footer-col-title { color: var(--primary-blue); font-weight: 700; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-links-list { list-style: none; padding: 0; }
+        .footer-links-list li { margin-bottom: 12px; }
+        .footer-links-list a { color: var(--text-muted); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
+        .footer-links-list a:hover { color: var(--primary-blue); }
+        .social-icon { width: 40px; height: 40px; color: var(--primary-blue); border-radius: 50%; border: 1px solid var(--primary-blue); display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; text-decoration: none; transition: all 0.2s; }
+        .social-icon:hover { background-color: var(--primary-blue); color: #fff; }
+        @media (max-width: 425px) { .footer-links-section { padding-top: 40px; } .footer-col-title { font-size: 1.1rem; margin-top: 10px; } }
+
+    </style>
+</head>
+
+<body>
+
+   <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-3 px-lg-5">
+
+            <a class="d-flex align-items-center text-decoration-none" href="#">
+                <img src="eagle-logo.png" alt="L" class="me-2 logo-img"
+                    style="border-radius: 4px; height: 40px; transition: height 0.3s;">
+
+                <span class="navbar-brand mb-0 h1 brand-text">Jobs</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon" style="filter: invert(0.5);"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/job/index.html">Home</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown">Categories</a>
+                        <ul class="dropdown-menu dropdown-menu-scrollable">
+                            <li>
+                                <h6 class="dropdown-header">IT & Software</h6>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Software Developer</a></li>
+                            <li><a class="dropdown-item" href="#">Web Developer</a></li>
+                            <li><a class="dropdown-item" href="#">Data Scientist</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <h6 class="dropdown-header">Sales & Marketing</h6>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Digital Marketing</a></li>
+                            <li><a class="dropdown-item" href="#">Brand Manager</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <h6 class="dropdown-header">Finance</h6>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Accountant</a></li>
+                            <li><a class="dropdown-item" href="#">Tax Consultant</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <h6 class="dropdown-header">Others</h6>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Human Resources</a></li>
+                            <li><a class="dropdown-item" href="#">Hospitality</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="./../job/companies.html">Companies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./../job/about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./../job/contact.html">Contact</a></li>
+                </ul>
+
+                <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3 mt-3 mt-lg-0">
+                    <a href="#" class="btn btn-nav-outline-blue">Sign In</a>
+                    <a href="#" class="btn btn-nav-outline-green">Job Alerts</a>
+                    <a href="#" class="btn btn-nav-orange">
+                        <i class="bi bi-megaphone-fill"></i> Post a Job
+                    </a>
+                    <button class="btn border-0 p-0" onclick="toggleTheme()" id="themeToggle"
+                        style="color: var(--text-main);">
+                        <i class="bi bi-moon fs-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header-section">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-8 ">
+                    <h5 class="display-6 fw-bold mb-3 text-white ">Empowering Careers, <br>Connecting Futures.</h5>
+                    <p class="text-white">We are on a mission to build the world's most transparent and efficient job marketplace for the modern digital economy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <h2 class="mb-4">We are more than just a <span style="color: var(--primary-blue);">Job Board</span>.</h2>
+                    <p class="mb-4">
+                        Founded in 2025, Career Center started with a simple idea: Recruitment shouldn't be painful. Candidates deserve transparency, and companies deserve talent that fits their culture, not just a keyword match.
+                    </p>
+                    <p class="mb-4">
+                        Today, we help millions of professionals find their path. From bootstrapped startups to Fortune 500 companies, we provide the technology and the community to make hiring human again.
+                    </p>
+                    
+                    <div class="d-flex gap-4 mt-5">
+                        <div>
+                            <h2 class="fw-bold mb-0" style="color: var(--text-main);">10M+</h2>
+                            <p class="small --text-muted">Candidates</p>
+                        </div>
+                        <div style="border-left: 1px solid var(--border-color);"></div>
+                        <div>
+                            <h2 class="fw-bold mb-0" style="color: var(--text-main);">150k+</h2>
+                            <p class="small --text-muted">Companies</p>
+                        </div>
+                        <div style="border-left: 1px solid var(--border-color);"></div>
+                        <div>
+                            <h2 class="fw-bold mb-0" style="color: var(--text-main);">120+</h2>
+                            <p class="small --text-muted">Countries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="mission-img-container">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Office Team" class="mission-img">
+                        
+                        <div class="stats-overlay">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-star-fill text-warning me-2"></i>
+                                <span class="fw-bold" style="color:var(--text-main)">4.9/5 Rating</span>
+                            </div>
+                            <p class="small mb-0">Trusted by thousands of job seekers worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-surface">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h5 style="color: var(--brand-orange);">Our Values</h5>
+                <h2>What Drives Us Forward</h2>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                        <h4>Radical Transparency</h4>
+                        <p>We believe in salary transparency and clear job descriptions. No guessing games, just honest opportunities.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h4>Community First</h4>
+                        <p>We build for people, not just algorithms. We foster connections that lead to mentorship and growth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="bi bi-rocket"></i>
+                        </div>
+                        <h4>Innovation</h4>
+                        <p>We constantly evolve our AI matching technology to ensure the perfect fit for both employer and employee.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Meet the Team</h2>
+                <p>The minds behind the platform.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="CEO" class="team-img">
+                        <div class="team-role">Founder & CEO</div>
+                        <h5>David Anderson</h5>
+                        <p class="small --text-muted mb-3">Visionary leader passionate about ed-tech and recruitment.</p>
+                        <div>
+                            <a href="#" class="--text-muted me-2"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="--text-muted"><i class="bi bi-twitter-x"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="CTO" class="team-img">
+                        <div class="team-role">Head of Product</div>
+                        <h5>Sarah Jenkins</h5>
+                        <p class="small --text-muted mb-3">Building the intuitive interfaces you use every day.</p>
+                        <div>
+                            <a href="#" class="--text-muted me-2"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="--text-muted"><i class="bi bi-twitter-x"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="COO" class="team-img">
+                        <div class="team-role">Chief of Operations</div>
+                        <h5>Michael Chen</h5>
+                        <p class="small --text-muted mb-3">Ensuring smooth connections between companies and talent.</p>
+                        <div>
+                            <a href="#" class="--text-muted me-2"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="--text-muted"><i class="bi bi-twitter-x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-surface text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Ready to start your journey?</h2>
+                    <p class="mb-5 lead">Join 10 million+ professionals who have found their dream careers through Career Center.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#" class="btn btn-nav-orange py-3 px-5">Find a Job</a>
+                        <a href="#" class="btn btn-nav-outline-blue py-3 px-5">Post a Job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-links-section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-12 mb-4 footer-brand">
+                    <h4>CAREER CENTER</h4>
+                    <p class="--text-muted">Empowering Global Talent through AI-driven connectivity, innovation, and
+                        community growth.</p>
+
+                    <div class="footer-contact-item mt-4">
+                        <i class="bi bi-telephone-fill"></i> +91 9022577005
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="bi bi-envelope-fill"></i><br>
+                        <a href="mailto:support@uplynkindia.com">support@uplynkindia.com</a><br>
+                        <a href="mailto:info@uplynkindia.com">info@uplynkindia.com</a><br>
+                        <a href="mailto:grievance@uplynkindia.com">grievance@uplynkindia.com</a><br>
+                        <a href="mailto:refunds@uplynkindia.com">refunds@uplynkindia.com</a><br>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-6 mb-4">
+                    <div class="footer-col-title">Quick Links</div>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-6 mb-4">
+                    <div class="footer-col-title">Modules</div>
+                    <ul class="footer-links-list">
+                        <li><a href="#">Matrimony</a></li>
+                        <li><a href="#">Classifieds</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Forums</a></li>
+                        <li><a href="#">Events</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-12 col-12 mb-4">
+                    <div class="footer-col-title">Connect With Us</div>
+                    <div class="d-flex">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-4 pt-4 text-center border-top">
+                <small class="--text-muted">© 2025 CAREER CENTER. Powered by Uplynk Networks Pvt. Ltd.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const icon = document.querySelector('#themeToggle i');
+
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('bi-moon');
+                icon.classList.add('bi-sun-fill');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.classList.remove('bi-sun-fill');
+                icon.classList.add('bi-moon');
+            }
+        }
+    </script>
+</body>
+
+</html>
