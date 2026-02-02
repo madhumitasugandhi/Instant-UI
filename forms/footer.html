@@ -4,152 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer Design</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        /* --- RESET & BASIC SETUP --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Libre Caslon Text', serif;
-            min-height: 200vh;
-            position: relative;
-        }
-
-        /* --- FOOTER STYLING --- */
-        .site-footer {
-            /* Desktop Padding */
-            padding: 80px 20px 90px;
-            text-align: center;
-            background-color: #5f5e5e;
-            /* Changed to lighter gray for better text contrast with #555 */
-            color: #fff;
-            position: relative;
-        }
-
-        /* Social Icons */
-        .social-icons {
-            margin-bottom: 35px;
-        }
-
-        .social-icons a {
-            color: #fff;
-            margin: 0 15px;
-            font-size: 20px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .social-icons a:hover {
-            color: #222;
-            transform: translateY(-3px);
-        }
-
-        /* Footer Text */
-        .footer-text p {
-            font-size: 14px;
-            color: #fff;
-            line-height: 2;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-
-        /* --- SCROLL TO TOP BUTTON --- */
-        .scroll-top-btn {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            /* Centers horizontally */
-
-            width: 45px;
-            height: 45px;
-            background-color: #333;
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .scroll-top-btn:hover {
-            background-color: #000;
-            transform: translateX(-50%) translateY(-5px);
-            /* Lift up slightly */
-        }
-
-        /* --- RESPONSIVENESS (Mobile & Tablet) --- */
-        @media (max-width: 768px) {
-
-            /* Reduce padding on mobile to save space */
-            .site-footer {
-                padding: 50px 20px 80px;
-            }
-
-            /* Make social icons slightly larger for touch targets */
-            .social-icons a {
-                margin: 0 12px;
-                font-size: 24px;
-            }
-
-            /* Adjust text size for readability */
-            .footer-text p {
-                font-size: 13px;
-                line-height: 1.6;
-            }
-
-            /* Make the button slightly bigger for thumbs */
-            .scroll-top-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-                bottom: 20px;
-            }
-        }
-    </style>
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <footer class="site-footer">
-        <div class="social-icons">
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        </div>
+    <footer class="footer-links-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12 mb-4 footer-brand">
+                    <h4 class="footer-title mb-4">FORUMS</h4>
+                    <p class="small mb-3">
+                        Uplynk Forums is a vibrant community where developers and job seekers connect, share knowledge,
+                        and grow together.
+                    </p>
 
-        <div class="footer-text">
-            <p>&copy; 2025 Kelli & Daniel Taylor Photography LLC</p>
-            <p>In Homewood · 28th Ave S · Birmingham, AL 35209</p>
-            <p>Tel: 205.478.8019</p>
-        </div>
+                    <div class="footer-contact-item mt-4 footer-links-list">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:+919022577005" data-no-loader class="footer-links-list">+91 9022577005</a>
+                    </div>
+                    <div class="d-flex align-items-start mb-3 footer-contact-item">
+                        <i class="fas fa-envelope me-2 mt-1"></i>
+                        <div class="d-flex flex-column footer-links-list">
+                            <strong class="mb-1 email">Email:</strong>
+                            <a href="mailto:support@uplynkindia.com" data-no-loader>support@uplynkindia.com</a>
+                            <a href="mailto:info@uplynkindia.com" data-no-loader>info@uplynkindia.com</a>
+                            <a href="mailto:grievance@uplynkindia.com" data-no-loader>grievance@uplynkindia.com</a>
+                            <a href="mailto:refunds@uplynkindia.com" data-no-loader>refunds@uplynkindia.com</a>
+                        </div>
+                    </div>
+                </div>
 
-        <a href="#" class="scroll-top-btn" onclick="scrollToTop(event)">
-            <i class="fa-solid fa-arrow-up"></i>
-        </a>
+                <div class="col-lg-3 col-md-3 mb-4">
+                    <div class="footer-col-title">QUICK LINKS</div>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Browse Categories</a></li>
+                        <li><a href="events.html">Upcoming Events</a></li>
+                        <li><a href="#">Top Contributors</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-3 mb-4">
+                    <div class="footer-col-title">SERVICES</div>
+                    <ul class="footer-links-list">
+                        <li><a href="#">Matrimony</a></li>
+                        <li><a href="#">Classifieds</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Forums</a></li>
+                        <li><a href="#">Events</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-12 col-12 mb-4">
+                    <div class="footer-col-title">CONNECT WITH US</div>
+                    <div class="d-flex">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-4 text-center border-top">
+                <p class="mb-0">
+                    &copy; Powered by
+                    <a href="http://www.uplynknetworks.com/" target="_blank" rel="noopener noreferrer"
+                        style="color: var(--primary-color);">
+                        Uplynk Networks Pvt. Ltd.
+                    </a>
+                </p>
+            </div>
+        </div>
     </footer>
-
-    <script>
-        // Smooth Scroll to Top Function
-        function scrollToTop(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-    </script>
-
+    <a href="#" id="scroll-top"
+        class="scroll-top d-flex align-items-center justify-content-center text-decoration-none">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
 </body>
 
 </html>
