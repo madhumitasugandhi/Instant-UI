@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORUMS - Uplynk Community</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <div class="mobile-toolbar d-lg-none">
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+            <i class="fa-solid fa-bars me-1"></i> Menu
+        </button>
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+            <i class="fa-solid fa-fire me-1"></i> Trending
+        </button>
+        <button class="btn mobile-btn active">
+            <i class="fa-solid fa-house me-1"></i> Feed
+        </button>
+    </div>
+
+    <div class="container-fluid px-lg-5 py-4 mt-5">
+        <div class="row g-4">
+
+            <div class="col-lg-2 d-none d-lg-block">
+                <div style="position: sticky; top: 100px;">
+                    <a href="#" class="sidebar-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="popular.html" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
+                    <a href="topics.html" class="sidebar-nav-link"><i class="fa-solid fa-tags"></i> Topics</a>
+
+                    <hr style="border-color: var(--border-color); margin: 15px 0;">
+
+                    <p class="small fw-bold text-uppercase px-3 mb-2"
+                        style="color: var(--text-muted); font-size: 0.75rem;">Browse Communities</p>
+
+                    <div class="sidebar-scroll-container">
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-comments text-primary"></i> General
+                            Discussion</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-map-marker-alt text-danger"></i>
+                            Local Community</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-hand-holding-heart text-success"></i>
+                            Advice & Support</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-laptop-code text-info"></i>
+                            Technology & Gadgets</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-house-chimney text-warning"></i>
+                            Housing</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-palette text-danger"></i> Hobbies &
+                            Interests</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-users text-primary"></i> Society &
+                            Culture</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-baby-carriage text-success"></i>
+                            Parenting & Family</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-heart-pulse text-danger"></i> Health
+                            & Wellness</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-utensils text-warning"></i> Food &
+                            Dining</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-plane text-info"></i> Travel &
+                            Lifestyle</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-primary"></i>
+                            Business</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-shirt text-danger"></i> Fashion &
+                            Beauty</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-film text-warning"></i>
+                            Entertainment</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-dumbbell text-success"></i> Sports &
+                            Fitness</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-music text-info"></i> Music & Art</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-gamepad text-primary"></i> Gaming &
+                            eSports</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-paw text-warning"></i> Pet Lovers</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-leaf text-success"></i>
+                            Environment</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-user-tie text-primary"></i> Career &
+                            Jobs</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-graduation-cap text-danger"></i>
+                            Education</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-coins text-warning"></i> Finance</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-scale-balanced text-info"></i>
+                            Legal</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-bullhorn text-muted"></i> Site
+                            Feedback</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 col-12">
+
+                <div class="mb-3 mt-4  position-relative">
+                    <input type="text" class="forum-search-input"
+                        placeholder="Search questions, topics, or hashtags...">
+                    <i class="fa-solid fa-magnifying-glass position-absolute"
+                        style="right: 15px; top: 15px; color: var(--text-muted);"></i>
+                </div>
+
+                <div class="forum-card create-post-wrapper">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="user-avatar" alt="User">
+                    <div class="fake-input">What's on your mind? Share a link or question...</div>
+                    <button class="btn btn-nav-outline-blue border-0"><i class="fa-regular fa-image fs-5"></i></button>
+                    <button class="btn btn-nav-outline-blue border-0"><i class="fa-solid fa-link fs-5"></i></button>
+                </div>
+
+                <div class="d-flex gap-2 mb-3">
+                    <button class="btn btn-sm btn-nav-outline-blue active">New</button>
+                    <button class="btn btn-sm btn-nav-outline-blue border-0">Top</button>
+                    <button class="btn btn-sm btn-nav-outline-blue border-0">Hot</button>
+                </div>
+
+                <div class="forum-card p-0 overflow-hidden">
+                    <div class="d-flex">
+                        <div class="vote-sidebar pt-3 bg-surface border-end"
+                            style="border-color: var(--border-color) !important; background-color: var(--surface-color);">
+                            <i class="fa-solid fa-caret-up vote-btn fs-4"></i>
+                            <span class="vote-count">245</span>
+                            <i class="fa-solid fa-caret-down vote-btn fs-4"></i>
+                        </div>
+                        <div class="p-3 flex-grow-1">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" width="20" height="20"
+                                    class="rounded-circle me-2">
+                                <span class="small fw-bold me-2">Sarah Jenkins</span>
+                                <span class="small text-muted" style="color: var(--text-muted) !important;">• 4 hours
+                                    ago</span>
+                                <span class="tag-pill ms-auto">#Career&Jobs</span>
+                            </div>
+                            <h5 class="mb-2"><a href="thread-detail.html" class="text-decoration-none text-reset">How to
+                                    handle
+                                    salary negotiations for a remote US startup from India?</a></h5>
+                            <p class="small mb-3">I recently got an offer from a Series A startup based in SF. They are
+                                offering equity + base. How should I benchmark the base salary?</p>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-regular fa-comment-alt me-1"></i> 42 Comments</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-solid fa-share-nodes me-1"></i> Share</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-solid fa-reply me-1"></i> Reply</a>
+                                <a href="#" class="text-muted small text-decoration-none ms-auto"
+                                    style="color: var(--text-muted) !important;"><i class="fa-regular fa-bookmark"></i>
+                                    Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forum-card p-0 overflow-hidden">
+                    <div class="d-flex">
+                        <div class="vote-sidebar pt-3 bg-surface border-end"
+                            style="border-color: var(--border-color) !important; background-color: var(--surface-color);">
+                            <i class="fa-solid fa-caret-up vote-btn fs-4"></i>
+                            <span class="vote-count">1.2k</span>
+                            <i class="fa-solid fa-caret-down vote-btn fs-4"></i>
+                        </div>
+                        <div class="p-3 flex-grow-1">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="small fw-bold me-2 text-success"><i class="fa-solid fa-thumbtack me-1"></i>
+                                    Pinned</span>
+                                <span class="small text-muted" style="color: var(--text-muted) !important;">• Uplynk
+                                    Official</span>
+                            </div>
+                            <h5 class="mb-2"><a href="thread-detail.html" class="text-decoration-none text-reset">New
+                                    Feature:
+                                    Verified "Startup Ready" Badge</a></h5>
+                            <p class="small mb-3">We have launched a new assessment test. Passing this gives you a
+                                verified badge visible to all recruiters in the Technology & Gadgets sector.</p>
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                class="img-fluid rounded mb-3"
+                                style="max-height: 250px; width: 100%; object-fit: cover;">
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-regular fa-comment-alt me-1"></i> 156 Comments</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-solid fa-share-nodes me-1"></i> Share</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-solid fa-reply me-1"></i> Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pb-4">
+                    <button class="btn btn-outline-primary rounded-pill px-4">Load More Posts <i
+                            class="fa-solid fa-chevron-down ms-2"></i></button>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 d-none d-lg-block mt-5">
+
+                <div class="forum-card" style="border-top: 4px solid var(--primary-blue);">
+                    <h6 class="mb-3">About Community</h6>
+                    <p class="small mb-3">The number one place for Indian developers and job seekers to connect.</p>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <h5 class="mb-0">150k</h5><small class="text-muted"
+                                style="color: var(--text-muted) !important;">Members</small>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="mb-0">2.1k</h5><small class="text-muted"
+                                style="color: var(--text-muted) !important;">Online</small>
+                        </div>
+                    </div>
+                    <a href="create-thread.html" class="btn btn-nav-orange w-100 justify-content-center mb-2">Create
+                        Post</a>
+                    <button class="btn btn-nav-outline-blue w-100">Create Community</button>
+                </div>
+
+                <div class="forum-card">
+                    <h6 class="mb-3 text-uppercase small text-muted" style="color: var(--text-muted) !important;">Top
+                        Contributors</h6>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rank-badge gold me-2">1</div>
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" width="35" height="35"
+                            class="rounded-circle me-2">
+                        <div class="flex-grow-1 line-height-1">
+                            <div class="small fw-bold">Priya Sharma</div>
+                            <small class="text-muted"
+                                style="font-size: 0.7rem; color: var(--text-muted) !important;">1,540 Rep</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rank-badge me-2">2</div>
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" width="35" height="35"
+                            class="rounded-circle me-2">
+                        <div class="flex-grow-1 line-height-1">
+                            <div class="small fw-bold">Rahul Verma</div>
+                            <small class="text-muted"
+                                style="font-size: 0.7rem; color: var(--text-muted) !important;">1,200 Rep</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forum-card">
+                    <h6 class="mb-3 text-uppercase small text-muted" style="color: var(--text-muted) !important;">
+                        Community Rules</h6>
+                    <ul class="list-unstyled small text-muted mb-0" style="color: var(--text-muted) !important;">
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Be respectful and kind.
+                        </li>
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> No spam or self-promotion.
+                        </li>
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Stay on topic.</li>
+                        <li><i class="fa-solid fa-check text-success me-2"></i> No hate speech.</li>
+                    </ul>
+                </div>
+
+                <div class="forum-card">
+                    <h6 class="mb-3 text-uppercase small text-muted" style="color: var(--text-muted) !important;">
+                        Trending Tags</h6>
+                    <div class="trending-item d-flex align-items-center justify-content-between">
+                        <div><span class="trending-rank">1</span><span class="fw-bold small">#Bangalore</span></div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                    </div>
+                    <div class="trending-item d-flex align-items-center justify-content-between">
+                        <div><span class="trending-rank">2</span><span class="fw-bold small">#TechNews</span></div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                    </div>
+                    <div class="trending-item d-flex align-items-center justify-content-between">
+                        <div><span class="trending-rank">3</span><span class="fw-bold small">#StockMarket</span></div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                    </div>
+                </div>
+
+                <div class="small text-muted px-2" style="color: var(--text-muted) !important;">
+                    <a href="#" class="me-2 text-decoration-none">Privacy</a>
+                    <a href="#" class="me-2 text-decoration-none">Terms</a>
+                    <a href="#" class="me-2 text-decoration-none">Content Policy</a>
+                    <p class="mt-2">Uplynk Inc © 2026.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--primary-blue);">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="index.html" class="sidebar-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="popular.html" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
+            <hr style="border-color: var(--border-color); margin: 15px 0;">
+            <p class="small fw-bold text-uppercase px-3 mb-2" style="color: var(--text-muted); font-size: 0.75rem;">
+                Browse Communities</p>
+            <div class="sidebar-scroll-container">
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-comments text-primary"></i> General
+                    Discussion</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-map-marker-alt text-danger"></i> Local
+                    Community</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-hand-holding-heart text-success"></i> Advice
+                    & Support</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-laptop-code text-info"></i> Technology &
+                    Gadgets</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-house-chimney text-warning"></i> Housing</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-palette text-danger"></i> Hobbies &
+                    Interests</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-users text-primary"></i> Society &
+                    Culture</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-baby-carriage text-success"></i> Parenting &
+                    Family</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-heart-pulse text-danger"></i> Health &
+                    Wellness</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-utensils text-warning"></i> Food & Dining</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-plane text-info"></i> Travel & Lifestyle</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-primary"></i> Business</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-shirt text-danger"></i> Fashion & Beauty</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-film text-warning"></i> Entertainment</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-dumbbell text-success"></i> Sports &
+                    Fitness</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-music text-info"></i> Music & Art</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-gamepad text-primary"></i> Gaming &
+                    eSports</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-paw text-warning"></i> Pet Lovers</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-leaf text-success"></i> Environment</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-user-tie text-primary"></i> Career & Jobs</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-graduation-cap text-danger"></i>
+                    Education</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-coins text-warning"></i> Finance</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-scale-balanced text-info"></i> Legal</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-bullhorn text-muted"></i> Site Feedback</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end offcanvas-custom" tabindex="-1" id="offcanvasRight">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--brand-orange);">Trending</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="forum-card">
+                <h6 class="mb-3 text-uppercase small text-muted" style="color: var(--text-muted) !important;">Trending
+                    Tags</h6>
+                <div class="trending-item d-flex align-items-center justify-content-between">
+                    <div><span class="trending-rank">1</span><span class="fw-bold small">#Bangalore</span></div>
+                    <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                </div>
+                <div class="trending-item d-flex align-items-center justify-content-between">
+                    <div><span class="trending-rank">2</span><span class="fw-bold small">#TechNews</span></div>
+                    <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                </div>
+                <div class="trending-item d-flex align-items-center justify-content-between">
+                    <div><span class="trending-rank">3</span><span class="fw-bold small">#StockMarket</span></div>
+                    <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="footer"></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200,
+            once: true
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Define Toggle Theme Function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const icon = document.querySelector('#themeToggle i');
+            
+            if(!icon) return; 
+
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Logic to load components THEN activate buttons
+        Promise.all([
+            fetch("header.html").then(res => res.text()).then(data => document.getElementById("navbar").innerHTML = data),
+            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("footer").innerHTML = data)
+        ]).then(() => {
+            
+            // This runs after header/footer exist in DOM
+            
+            // Initialize Scroll Top Button
+            const scrollTopBtn = document.getElementById('scroll-top');
+            if(scrollTopBtn) {
+                window.addEventListener('scroll', function () {
+                    if (window.scrollY > 300) {
+                        scrollTopBtn.classList.add('active');
+                    } else {
+                        scrollTopBtn.classList.remove('active');
+                    }
+                });
+
+                scrollTopBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
