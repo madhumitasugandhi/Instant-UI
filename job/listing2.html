@@ -1,0 +1,865 @@
+<!-- <!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings - Uplynk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --surface-color: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --primary-blue: #2563EB;
+            --primary-light: #eff6ff;
+            --success-green: #10b981;
+            --brand-orange: #F97316;
+            --brand-orange-hover: #ea580c;
+            
+            /* Interactions */
+            --hover-border: #1a1289;
+            --hover-bg: #eef2ff;
+            --hover-text: #1a1289;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+            --primary-blue: #3b82f6;
+            --primary-light: #1e3a8a;
+            --success-green: #34d399;
+            --brand-orange: #fb923c;
+            --brand-orange-hover: #f97316;
+
+            /* Interactions */
+            --hover-border: #94adf8;
+            --hover-bg: #1e293b; 
+            --hover-text: #94adf8;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        /* --- 2. UNIQUE UTILITY CLASSES --- */
+        
+        .jl-body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--surface-color);
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        .jl-heading { color: var(--text-main) !important; }
+        .jl-text-main { color: var(--primary-blue) !important; }
+        .jl-text-muted { color: var(--text-muted) !important; }
+
+        /* --- 3. COMPONENT STYLES --- */
+        
+        /* Navbar */
+        .jl-navbar { background-color: var(--bg-color); border-bottom: 1px solid var(--border-color); padding: 12px 0; z-index: 1000; }
+        .jl-navbar-brand { font-weight: 800; font-size: 1.5rem; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+        .jl-nav-link { font-weight: 500; margin: 0 10px; transition: color 0.2s; color: var(--text-muted) !important; }
+        .jl-nav-link:hover { color: var(--primary-blue) !important; }
+        
+        /* Buttons */
+        .jl-btn-orange { background-color: var(--brand-orange); color: #fff; font-weight: 600; border-radius: 6px; padding: 8px 16px; border: 1px solid var(--brand-orange); display: flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.2s; white-space: nowrap;}
+        .jl-btn-orange:hover { background-color: var(--brand-orange-hover); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2); }
+        
+        .jl-btn-outline { color: var(--primary-blue); border: 1px solid var(--primary-blue); background: transparent; font-weight: 600; border-radius: 6px; padding: 8px 16px; text-decoration: none; transition: all 0.2s; white-space: nowrap;}
+        .jl-btn-outline:hover { background-color: var(--primary-blue); color: #fff; }
+        
+        .jl-btn-search { background-color: var(--brand-orange); color: white; border: none; border-radius: 50px; padding: 10px 24px; font-weight: 600; transition: 0.2s; white-space: nowrap; }
+        .jl-btn-search:hover { background-color: var(--brand-orange-hover); transform: scale(1.05); }
+
+        .jl-btn-filter-toggle {
+            width: 100%;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Header & Search Bar */
+        .jl-page-header { background-color: var(--bg-color); padding: 50px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 30px; }
+        
+        .jl-search-wrapper { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 50px; padding: 5px 5px 5px 20px; display: flex; align-items: center; box-shadow: var(--card-shadow); transition: all 0.2s ease; }
+        .jl-search-wrapper:focus-within { border-color: var(--primary-blue); box-shadow: var(--focus-ring); }
+        
+        .jl-search-group { flex: 1; display: flex; align-items: center; position: relative; }
+        .jl-search-divider { width: 1px; height: 24px; background-color: var(--border-color); margin: 0 15px; }
+        .jl-search-input { border: none; background: transparent; width: 100%; outline: none; color: var(--text-main); padding: 10px 0; font-size: 0.95rem; font-weight: 500; }
+        .jl-search-input::placeholder { color: var(--text-muted); font-weight: 400; }
+        .jl-search-icon { color: var(--text-muted); font-size: 1.1rem; margin-right: 12px; transition: 0.2s; }
+        .jl-search-group:focus-within .jl-search-icon { color: var(--primary-blue); }
+
+        /* Sidebar Filter */
+        .jl-filter-card { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; position: sticky; top: 100px; }
+        .jl-filter-title { font-weight: 700; margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+        .jl-check-label { color: var(--text-main) !important; font-size: 0.95rem; cursor: pointer; }
+        .form-check-input:checked { background-color: var(--brand-orange); border-color: var(--brand-orange); }
+
+        /* Job Cards */
+        .jl-card { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 16px; transition: all 0.25s ease; position: relative; display: flex; flex-direction: column; gap: 15px; }
+        @media(min-width: 768px) { .jl-card { flex-direction: row; align-items: center; gap: 24px; } }
+        .jl-card:hover { border-color: var(--hover-border); background-color: var(--hover-bg); transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); }
+        
+        .jl-company-logo { width: 64px; height: 64px; border-radius: 12px; background: var(--surface-color); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.6rem; color: var(--primary-blue); border: 1px solid var(--border-color); flex-shrink: 0; transition: 0.3s; }
+        .jl-card:hover .jl-company-logo { background: #fff; border-color: var(--primary-blue); }
+
+        .jl-job-info { flex-grow: 1; }
+        .jl-job-title { font-weight: 700; font-size: 1.15rem; color: var(--text-main) !important; margin-bottom: 6px; transition: 0.2s; text-decoration: none; display: block; }
+        .jl-card:hover .jl-job-title { color: var(--hover-text) !important; }
+        
+        .jl-job-meta { font-size: 0.9rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 10px; }
+        .jl-job-meta span { display: flex; align-items: center; gap: 6px; }
+        .jl-job-meta i { color: var(--text-muted); font-size: 1rem; }
+
+        .jl-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .jl-tag { font-size: 0.8rem; padding: 4px 12px; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 50px; color: var(--text-muted); font-weight: 500; transition: 0.2s; }
+        .jl-card:hover .jl-tag { background: #fff; border-color: var(--primary-blue); color: var(--primary-blue); }
+
+        .jl-job-action { text-align: right; min-width: 140px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 8px; }
+        .jl-salary { display: block; font-weight: 700; color: var(--success-green); font-size: 1.1rem; }
+        
+        .jl-btn-bookmark { color: var(--text-muted); background: transparent; border: none; font-size: 1.2rem; transition: 0.2s; }
+        .jl-btn-bookmark:hover { color: var(--brand-orange); }
+
+        /* Footer */
+        .jl-footer { border-top: 1px solid var(--border-color); padding: 80px 0 30px 0; background-color: var(--surface-color); margin-top: 80px; }
+        .jl-footer-title { color: var(--primary-blue); font-weight: 700; margin-bottom: 24px; font-size: 1.1rem; text-transform: uppercase; }
+        .jl-footer-link a { color: var(--text-muted); text-decoration: none; transition: 0.2s; font-size: 0.95rem; }
+        .jl-footer-link a:hover { color: var(--brand-orange); }
+        .jl-social-icon { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--bg-color); border: 1px solid var(--border-color); color: var(--text-muted); margin-right: 10px; transition: 0.2s; text-decoration: none; }
+        .jl-social-icon:hover { background: var(--brand-orange); color: white; border-color: var(--brand-orange); transform: translateY(-3px); }
+
+        /* --- 4. RESPONSIVE QUERIES --- */
+        @media (max-width: 991px) {
+            .jl-page-header { padding: 30px 0; }
+            
+            /* Stack search bars vertically on mobile */
+            .jl-search-wrapper { flex-direction: column; align-items: stretch; padding: 15px; gap: 10px; border-radius: 20px; }
+            .jl-search-divider { display: none; }
+            .jl-search-group { width: 100%; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+            .jl-search-group:last-child { border-bottom: none; }
+            .jl-btn-search { width: 100%; margin-top: 5px; border-radius: 12px; }
+            
+            /* Adjust Filter Sidebar */
+            .jl-filter-card { position: static; margin-bottom: 20px; }
+            
+            /* Job Card Mobile Layout */
+            .jl-job-action { width: 100%; flex-direction: row; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color); }
+            .jl-btn-bookmark { position: absolute; top: 15px; right: 15px; }
+            .jl-salary { order: 1; }
+            .jl-btn-outline { width: auto; min-width: 120px; }
+        }
+    </style>
+</head>
+
+<body class="jl-body">
+
+    <nav class="navbar navbar-expand-lg sticky-top jl-navbar">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="d-flex align-items-center text-decoration-none jl-navbar-brand" href="index.html">
+                <img src="eagle-logo.png" alt="L" class="me-2" style="border-radius: 4px; height: 40px;">
+                <span class="jl-text-main">Jobs</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link jl-nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link jl-nav-link" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link jl-nav-link" href="#">Companies</a></li>
+                    <li class="nav-item"><a class="nav-link jl-nav-link" href="#">About</a></li>
+                </ul>
+                <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3 mt-3 mt-lg-0">
+                    <a href="#" class="jl-btn-outline w-100 w-lg-auto justify-content-center">Sign In</a>
+                    <a href="#" class="jl-btn-orange w-100 w-lg-auto justify-content-center"><i class="bi bi-megaphone-fill"></i> Post a Job</a>
+                    <button class="btn border-0 p-0" onclick="toggleTheme()" style="color: var(--text-main);">
+                        <i class="bi bi-moon fs-5" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="jl-page-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0 text-center text-lg-start">
+                    <h2 class="fw-800 mb-2 display-6 jl-heading">Find your next role</h2>
+                    <p class="mb-0 fs-5 jl-text-muted">Browsing <span class="fw-bold text-primary" id="catTitle">All Jobs</span></p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="jl-search-wrapper">
+                        <div class="jl-search-group">
+                            <i class="bi bi-search jl-search-icon"></i>
+                            <input type="text" class="jl-search-input" placeholder="Job title, skill, or company" id="jobSearch">
+                        </div>
+                        <div class="jl-search-divider"></div>
+                        <div class="jl-search-group">
+                            <i class="bi bi-geo-alt jl-search-icon"></i>
+                            <input type="text" class="jl-search-input" placeholder="City or 'Remote'" id="locSearch">
+                        </div>
+                        <button class="jl-btn-search ms-lg-2">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container pb-5">
+        <div class="row">
+            
+            <div class="col-lg-3">
+                <button class="jl-btn-filter-toggle d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterSidebar">
+                    <span><i class="bi bi-sliders me-2"></i> Show Filters</span>
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+
+                <div class="collapse d-lg-block" id="filterSidebar">
+                    <div class="jl-filter-card mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h6 class="mb-0 fw-bold fs-5 jl-heading">Filters</h6>
+                            <a href="#" class="text-decoration-none small fw-bold" style="color: var(--brand-orange);">Reset</a>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="jl-filter-title">Job Type</div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="ft" checked>
+                                <label class="form-check-label jl-check-label" for="ft">Full Time <span class="small jl-text-muted">(45)</span></label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="pt">
+                                <label class="form-check-label jl-check-label" for="pt">Part Time <span class="small jl-text-muted">(12)</span></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fl">
+                                <label class="form-check-label jl-check-label" for="fl">Freelance <span class="small jl-text-muted">(8)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="jl-filter-title">Experience</div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="exp1">
+                                <label class="form-check-label jl-check-label" for="exp1">Fresher</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="exp2" checked>
+                                <label class="form-check-label jl-check-label" for="exp2">1-3 Years</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="exp3">
+                                <label class="form-check-label jl-check-label" for="exp3">3+ Years</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="jl-filter-title">Salary Range</div>
+                            <input type="range" class="form-range" id="customRange1">
+                            <div class="d-flex justify-content-between small fw-bold jl-text-muted">
+                                <span>$10k</span>
+                                <span>$200k+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+                    <span class="jl-text-muted fw-bold small">Showing 145 Jobs</span>
+                    <select class="form-select form-select-sm w-auto border-0 shadow-none bg-transparent fw-bold jl-text-muted" style="cursor: pointer;">
+                        <option>Sort by: Newest</option>
+                        <option>Sort by: Salary</option>
+                    </select>
+                </div>
+
+                <div class="jl-card">
+                    <button class="position-absolute top-0 end-0 m-3 jl-btn-bookmark d-none d-md-block"><i class="bi bi-bookmark"></i></button>
+                    <div class="jl-company-logo">L</div>
+                    <div class="jl-job-info">
+                        <a href="#" class="jl-job-title">Senior Laravel Developer</a>
+                        <div class="jl-job-meta">
+                            <span class="fw-bold jl-text-main">LaraTech Solutions</span>
+                            <span><i class="bi bi-geo-alt"></i> Pune, India</span>
+                            <span><i class="bi bi-clock"></i> 2d ago</span>
+                        </div>
+                        <div class="jl-tags">
+                            <span class="jl-tag">PHP</span>
+                            <span class="jl-tag">Laravel 10</span>
+                            <span class="jl-tag">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="jl-job-action">
+                        <span class="jl-salary">₹12L - ₹18L</span>
+                        <a href="#" class="jl-btn-outline btn-sm">Apply Now</a>
+                    </div>
+                </div>
+
+                <div class="jl-card">
+                    <button class="position-absolute top-0 end-0 m-3 jl-btn-bookmark d-none d-md-block"><i class="bi bi-bookmark"></i></button>
+                    <div class="jl-company-logo" style="color: var(--brand-orange); border-color: var(--brand-orange);">U</div>
+                    <div class="jl-job-info">
+                        <a href="#" class="jl-job-title">Frontend Engineer (React)</a>
+                        <div class="jl-job-meta">
+                            <span class="fw-bold jl-text-main">Uplynk Inc.</span>
+                            <span><i class="bi bi-geo-alt"></i> Remote</span>
+                            <span><i class="bi bi-clock"></i> 5h ago</span>
+                        </div>
+                        <div class="jl-tags">
+                            <span class="jl-tag">React.js</span>
+                            <span class="jl-tag">Redux</span>
+                            <span class="jl-tag">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="jl-job-action">
+                        <span class="jl-salary">$40k - $60k</span>
+                        <a href="#" class="jl-btn-outline btn-sm">Apply Now</a>
+                    </div>
+                </div>
+
+                 <div class="jl-card">
+                    <button class="position-absolute top-0 end-0 m-3 jl-btn-bookmark d-none d-md-block"><i class="bi bi-bookmark"></i></button>
+                    <div class="jl-company-logo">D</div>
+                    <div class="jl-job-info">
+                        <a href="#" class="jl-job-title">UI/UX Designer</a>
+                        <div class="jl-job-meta">
+                            <span class="fw-bold jl-text-main">DesignStudio</span>
+                            <span><i class="bi bi-geo-alt"></i> Mumbai, India</span>
+                            <span><i class="bi bi-clock"></i> 1d ago</span>
+                        </div>
+                        <div class="jl-tags">
+                            <span class="jl-tag">Figma</span>
+                            <span class="jl-tag">Adobe XD</span>
+                            <span class="jl-tag">Prototyping</span>
+                        </div>
+                    </div>
+                    <div class="jl-job-action">
+                        <span class="jl-salary">₹6L - ₹9L</span>
+                        <a href="#" class="jl-btn-outline btn-sm">Apply Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="jl-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="jl-footer-title">JOBS</h4>
+                    <p class="small pe-lg-5 jl-text-muted">Empowering Global Talent through AI-driven connectivity, innovation, and community growth.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <div class="jl-footer-title">Quick Links</div>
+                    <ul class="list-unstyled jl-footer-link">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <div class="jl-footer-title">Modules</div>
+                    <ul class="list-unstyled jl-footer-link">
+                        <li><a href="#">Matrimony</a></li>
+                        <li><a href="#">Classifieds</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Forums</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="jl-footer-title">Connect With Us</div>
+                    <div class="d-flex mb-3">
+                        <a href="#" class="jl-social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="jl-social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="jl-social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="jl-social-icon"><i class="bi bi-twitter"></i></a>
+                    </div>
+                    <p class="small jl-text-muted">Subscribe to our newsletter for the latest updates.</p>
+                </div>
+            </div>
+            <div class="mt-5 pt-4 text-center border-top">
+                <p class="small jl-text-muted">&copy; 2026 Uplynk Networks Pvt. Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            if (category) {
+                document.getElementById('catTitle').innerText = category;
+                document.getElementById('jobSearch').value = category;
+            }
+            
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        };
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const target = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', target);
+            localStorage.setItem('theme', target);
+            updateIcon(target);
+        }
+
+        function updateIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            icon.className = theme === 'light' ? 'bi bi-moon fs-5' : 'bi bi-sun fs-5';
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings - Uplynk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* --- 1. CORE VARIABLES (MATCHING YOUR HOME PAGE) --- */
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --surface-color: #f9fafb;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --primary-blue: #2563EB;
+            --success-green: #10b981;
+            --brand-orange: #F97316;
+            --brand-orange-hover: #ea580c;
+            
+            /* New Variables for Listing Page Interactions */
+            --hover-border: #1a1289;
+            --hover-bg: #eef2ff;
+            --hover-text: #1a1289;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+            --primary-blue: #3b82f6;
+            --success-green: #34d399;
+            --brand-orange: #fb923c;
+            --brand-orange-hover: #f97316;
+
+            /* New Variables for Listing Page Interactions */
+            --hover-border: #94adf8;
+            --hover-bg: #1e293b; 
+            --hover-text: #94adf8;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--surface-color); /* Slight contrast for the list background */
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* --- 2. YOUR ORIGINAL NAVBAR STYLES --- */
+        .navbar { background-color: var(--bg-color); border-bottom: 1px solid var(--border-color); padding: 12px 0; z-index: 1000; }
+        .navbar-brand { font-weight: 800; font-size: 1.5rem; color: var(--primary-blue) !important; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+        .navbar-nav .nav-link { color: var(--text-muted) !important; font-weight: 500; margin: 0 10px; }
+        .btn-nav-orange { background-color: var(--brand-orange); color: #fff; font-weight: 600; border-radius: 6px; padding: 8px 16px; border: 1px solid var(--brand-orange); display: flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.2s; }
+        .btn-nav-orange:hover { background-color: var(--brand-orange-hover); color: #fff; transform: translateY(-2px); }
+        .btn-nav-outline-blue { color: var(--primary-blue); border: 1px solid var(--primary-blue); background: transparent; font-weight: 600; border-radius: 6px; padding: 8px 16px; text-decoration: none; transition: 0.2s; }
+        .btn-nav-outline-blue:hover { background-color: var(--primary-blue); color: #fff; }
+
+        /* --- 3. NEW LISTING PAGE SPECIFIC STYLES --- */
+        
+        /* Header Area */
+        .page-header {
+            background-color: var(--bg-color);
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .search-wrapper {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px;
+            display: flex;
+            gap: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        .search-input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            outline: none;
+            color: var(--text-main);
+            padding: 10px;
+        }
+
+        /* Sidebar Filters */
+        .filter-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            position: sticky;
+            top: 90px; /* Sticks below navbar */
+        }
+        .filter-title { font-weight: 700; margin-bottom: 15px; font-size: 0.95rem; }
+        .form-check-label { color: var(--text-muted); font-size: 0.9rem; cursor: pointer; }
+        .form-check-input:checked { background-color: var(--brand-orange); border-color: var(--brand-orange); }
+
+        /* Job Cards (Horizontal) */
+        .job-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.25s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media(min-width: 768px) {
+            .job-card { flex-direction: row; align-items: center; gap: 20px; }
+        }
+
+        .job-card:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--hover-border);
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+        .job-card:hover .job-title { color: var(--hover-text); }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .job-info { flex-grow: 1; }
+        .job-title { font-weight: 700; font-size: 1.1rem; color: var(--text-main); margin-bottom: 4px; transition: 0.2s; }
+        .job-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 15px; align-items: center; }
+        .job-meta i { color: var(--brand-orange); margin-right: 4px; }
+        
+        .job-tags { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { font-size: 0.75rem; padding: 4px 10px; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px; color: var(--text-muted); font-weight: 500; }
+        
+        .job-action { text-align: right; min-width: 140px; }
+        .salary { display: block; font-weight: 700; color: var(--success-green); font-size: 1.1rem; margin-bottom: 8px; }
+
+        /* --- 4. YOUR ORIGINAL FOOTER STYLES --- */
+        .footer-links-section { border-top: 1px solid var(--border-color); padding: 80px 0 20px 0; background-color: var(--surface-color); margin-top: 60px; }
+        .footer-col-title { color: var(--primary-blue); font-weight: 700; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-links-list { list-style: none; padding: 0; }
+        .footer-links-list a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
+        .footer-links-list a:hover { color: var(--primary-blue); }
+        .social-icon { color: var(--text-muted); font-size: 1.2rem; margin-right: 15px; transition: 0.2s; }
+        .social-icon:hover { color: var(--brand-orange); }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 20px 0; }
+            .search-wrapper { flex-direction: column; }
+            .btn-nav-orange, .btn-nav-outline-blue { width: 100%; justify-content: center; }
+            .job-action { text-align: left; margin-top: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="d-flex align-items-center text-decoration-none" href="index.html">
+                <img src="eagle-logo.png" alt="L" class="me-2" style="border-radius: 4px; height: 40px;">
+                <span class="navbar-brand mb-0 h1">Jobs</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Companies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                </ul>
+                <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3">
+                    <a href="#" class="btn-nav-outline-blue">Sign In</a>
+                    <a href="#" class="btn-nav-orange"><i class="bi bi-megaphone-fill"></i> Post a Job</a>
+                    <button class="btn border-0 p-0" onclick="toggleTheme()" style="color: var(--text-main);">
+                        <i class="bi bi-moon fs-5" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-3 mb-lg-0">
+                    <h2 class="fw-bold mb-1">Find your next role</h2>
+                    <p class="--text-muted mb-0">Browsing <span class="fw-bold text-primary" id="catTitle">All Jobs</span></p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="search-wrapper">
+                        <i class="bi bi-search fs-5 text-muted align-self-center ps-2"></i>
+                        <input type="text" class="search-input" placeholder="Search title, skill, or company..." id="jobSearch">
+                        <button class="btn btn-nav-orange border-0">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container pb-5">
+        <div class="row">
+            
+            <div class="col-lg-3 mb-4">
+                <div class="filter-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0 fw-bold">Filters</h6>
+                        <a href="#" class="text-decoration-none small" style="color: var(--brand-orange);">Clear</a>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="filter-title">Job Type</div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="ft" checked>
+                            <label class="form-check-label" for="ft">Full Time (45)</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="pt">
+                            <label class="form-check-label" for="pt">Part Time (12)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="fl">
+                            <label class="form-check-label" for="fl">Freelance (8)</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="filter-title">Experience</div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="exp1">
+                            <label class="form-check-label" for="exp1">Fresher</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="exp2" checked>
+                            <label class="form-check-label" for="exp2">1-3 Years</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="exp3">
+                            <label class="form-check-label" for="exp3">3+ Years</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="filter-title">Salary Range</div>
+                        <input type="range" class="form-range" id="customRange1">
+                        <div class="d-flex justify-content-between small --text-muted">
+                            <span>$10k</span>
+                            <span>$200k+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="--text-muted small">Showing 145 Jobs</span>
+                    <select class="form-select form-select-sm w-auto" style="background-color: var(--bg-color); color: var(--text-main); border-color: var(--border-color);">
+                        <option>Newest First</option>
+                        <option>Salary High to Low</option>
+                    </select>
+                </div>
+
+                <div class="job-card">
+                    <div class="company-logo">L</div>
+                    <div class="job-info">
+                        <h5 class="job-title">Senior Laravel Developer</h5>
+                        <div class="job-meta">
+                            <span>LaraTech Solutions</span>
+                            <span><i class="bi bi-geo-alt-fill"></i> Pune, India (Hybrid)</span>
+                            <span><i class="bi bi-clock"></i> 2 days ago</span>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">Laravel 10</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="job-action">
+                        <span class="salary">₹12L - ₹18L</span>
+                        <a href="#" class="btn btn-sm btn-nav-outline-blue w-100">Apply Now</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="company-logo" style="color: var(--brand-orange);">U</div>
+                    <div class="job-info">
+                        <h5 class="job-title">Frontend Engineer (React)</h5>
+                        <div class="job-meta">
+                            <span>Uplynk Inc.</span>
+                            <span><i class="bi bi-geo-alt-fill"></i> Remote</span>
+                            <span><i class="bi bi-clock"></i> 5 hours ago</span>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag">React.js</span>
+                            <span class="tag">Redux</span>
+                            <span class="tag">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="job-action">
+                        <span class="salary">$40k - $60k</span>
+                        <a href="#" class="btn btn-sm btn-nav-outline-blue w-100">Apply Now</a>
+                    </div>
+                </div>
+
+                 <div class="job-card">
+                    <div class="company-logo">D</div>
+                    <div class="job-info">
+                        <h5 class="job-title">UI/UX Designer</h5>
+                        <div class="job-meta">
+                            <span>DesignStudio</span>
+                            <span><i class="bi bi-geo-alt-fill"></i> Mumbai, India</span>
+                            <span><i class="bi bi-clock"></i> 1 day ago</span>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag">Figma</span>
+                            <span class="tag">Adobe XD</span>
+                        </div>
+                    </div>
+                    <div class="job-action">
+                        <span class="salary">₹6L - ₹9L</span>
+                        <a href="#" class="btn btn-sm btn-nav-outline-blue w-100">Apply Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-links-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-col-title">JOBS</h4>
+                    <p class="text-muted small">Empowering Global Talent through AI-driven connectivity, innovation, and community growth.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <div class="footer-col-title">Quick Links</div>
+                    <ul class="footer-links-list small">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <div class="footer-col-title">Modules</div>
+                    <ul class="footer-links-list small">
+                        <li><a href="#">Matrimony</a></li>
+                        <li><a href="#">Classifieds</a></li>
+                        <li><a href="#">Jobs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-col-title">Connect With Us</div>
+                    <div class="d-flex">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 pt-4 text-center border-top">
+                <p class="small text-muted">&copy; Powered by Uplynk Networks Pvt. Ltd.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Handle Category from URL & Theme
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            if (category) {
+                document.getElementById('catTitle').innerText = category;
+                document.getElementById('jobSearch').value = category;
+            }
+            
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        };
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const target = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', target);
+            localStorage.setItem('theme', target);
+            updateIcon(target);
+        }
+
+        function updateIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            icon.className = theme === 'light' ? 'bi bi-moon fs-5' : 'bi bi-sun fs-5';
+        }
+    </script>
+</body>
+</html>

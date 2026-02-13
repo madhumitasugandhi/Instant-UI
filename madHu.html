@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Hrushi ❤️</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* background image */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(rgba(20, 0, 0, 0.6), rgba(20, 0, 0, 0.7)),
+                url("/Madhu/bg.png") center/cover no-repeat;
+            z-index: -2;
+            animation: zoom 30s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(1)
+            }
+
+            to {
+                transform: scale(1.08)
+            }
+        }
+
+        /* glow overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 70% 20%, rgba(255, 120, 120, 0.25), transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(255, 80, 120, 0.2), transparent 60%);
+            z-index: -1;
+        }
+
+        /* card */
+        .glass-card {
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(18px);
+            border-radius: 25px;
+            padding: 2rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        /* lyrics */
+        .lyric-box {
+            font-size: 1.2rem;
+            min-height: 100px;
+            margin: 20px 0;
+            color: #ffd1d1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            text-shadow: 0 0 10px rgba(255, 150, 150, 0.4);
+        }
+
+        .btn-love {
+            background: #ff4b6e;
+            border: none;
+            padding: 12px 0;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 75, 110, 0.4);
+        }
+
+        @media (max-width:600px) {
+
+            body::before {
+                background:
+                    linear-gradient(rgba(20, 0, 0, 0.6), rgba(20, 0, 0, 0.7)),
+                    url("/Madhu/bg.png") center top/contain no-repeat;
+
+                background-color: #200122;
+                animation: mobileMove 16s ease-in-out infinite alternate;
+            }
+
+            @keyframes mobileMove {
+                0% {
+                    transform: scale(1);
+                    background-position: center top;
+                }
+
+                100% {
+                    transform: scale(1.05);
+                    background-position: center 100%;
+                }
+            }
+
+        }
+
+        /* 💖 HEARTS BACKGROUND */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .hearts span {
+            position: absolute;
+            top: -50px;
+            font-size: 20px;
+            color: rgba(255, 120, 150, 0.4);
+            animation: fall linear infinite;
+        }
+
+        /* different sizes */
+        .hearts span:nth-child(odd) {
+            font-size: 26px;
+            opacity: 0.6;
+        }
+
+        .hearts span:nth-child(even) {
+            font-size: 18px;
+            opacity: 0.3;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px);
+            }
+
+            100% {
+                transform: translateY(110vh);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hearts"></div>
+
+    <!-- hidden player container -->
+    <div id="player" style="position:fixed;left:-9999px;"></div>
+
+    <div class="glass-card">
+        <i class="bi bi-heart-fill text-danger" style="font-size:3rem;"></i>
+        <h3 class="fw-bold mt-2"> To Mr.Vinchurkar ❤️</h3>
+
+        <div class="lyric-box" id="lyricBox">
+            Tap and listen...
+        </div>
+        <h3 class="fw-bold mt-2"> From Mrs.Vinchurkar ❤️</h3>
+        <button class="btn btn-love rounded-pill w-100 text-white" id="btn" onclick="playMusic()">
+            TAP TO START 🎵
+        </button>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        let player;
+        let playing = false;
+        let timer;
+        let startOffset = 24;
+        let startedOnce = false;
+        let playerReady = false;
+
+        const box = document.getElementById("lyricBox");
+        const btn = document.getElementById("btn");
+
+        /* disable button until player ready */
+        btn.disabled = true;
+        btn.innerText = "Loading...";
+
+        /* lyrics */
+        const stanza = [
+            { t: 0, text: "Inn Haathon Mein Jab Se Hai" },
+            { t: 5, text: "Aaya Yeh Haath Tumhaara" },
+            { t: 9, text: "Jaise Dariya Ki Hulchul Ko" },
+            { t: 13, text: "Mil Jaaye Koi Kinaara" },
+            { t: 17, text: "Tumhaare Sang Awaargi Bhi" },
+            { t: 22, text: "Deti Hai Jaise Sukoon" },
+            { t: 25, text: "Tumhaare Sang Har Ek Lamha" },
+            { t: 30, text: "Yaadein Nayi Main Bunoon" },
+            { t: 34, text: "Tum Ho Toh Subah Nayi Hai" },
+            { t: 38, text: "Tum Ho Toh Shaamein Haseen Hai" },
+            { t: 42, text: "Ik Duniya Sapnon Si Hai" },
+            { t: 47, text: "Tum Ho Toh Ispe Yakeen Hai" },
+            { t: 50, text: "Tum Ho Toh Sab Achha Hai" },
+            { t: 54, text: "Tum Ho Toh Waqt Thhama Hai" },
+            { t: 59, text: "Tum Ho Toh Yeh Lamha Hai" },
+            { t: 63, text: "Tum Ho Toh Ismein Sadaa Hai" },
+            { t: 67, text: "Tum Ho Toh" },
+            { t: 76, text: "Tum Ho Toh Ismein Sadaa Hai ❤️" }
+        ];
+
+        /* player ready */
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player("player", {
+                height: "360",
+                width: "640",
+                videoId: "8SYPKQMW_2Q",
+                playerVars: { controls: 0 },
+                events: {
+                    onReady: () => {
+                        playerReady = true;
+                        btn.disabled = false;
+                        btn.innerText = "TAP TO START 🎵";
+                    }
+                }
+            });
+        }
+
+        /* play button */
+        function playMusic() {
+
+            if (!playerReady) return;
+
+            if (!playing) {
+
+                if (!startedOnce) {
+                    player.seekTo(startOffset, true);
+                    startedOnce = true;
+                }
+
+                player.playVideo();
+                btn.innerText = "PAUSE";
+                playing = true;
+
+                timer = setInterval(() => {
+
+                    let current = player.getCurrentTime() - startOffset;
+                    const line = stanza.findLast(s => current >= s.t);
+                    if (line) box.innerText = line.text;
+
+                    if (player.getCurrentTime() >= 110) {
+                        player.pauseVideo();
+                        clearInterval(timer);
+                        playing = false;
+                        startedOnce = false;
+
+                        btn.innerText = "PLAY AGAIN 💖";
+                        box.innerText = "Happy Valentine's Day Hrushi ❤️";
+                        confetti({ particleCount: 300, spread: 120 });
+                    }
+
+                }, 200);
+
+            } else {
+                player.pauseVideo();
+                btn.innerText = "RESUME";
+                playing = false;
+                clearInterval(timer);
+            }
+        }
+
+        /* hearts generator */
+        const heartsContainer = document.querySelector(".hearts");
+        for (let i = 0; i < 25; i++) {
+            let heart = document.createElement("span");
+            heart.innerHTML = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+            heart.style.animationDelay = Math.random() * 5 + "s";
+            heartsContainer.appendChild(heart);
+        }
+    </script>
+
+
+</body>
+
+</html>

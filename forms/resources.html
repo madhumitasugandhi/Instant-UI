@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Uplynk Community</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <section class="resources-hero">
+        <div class="container">
+            <h1 class="display-6 mt-5 mb-3">Knowledge Library</h1>
+            <p class="lead mb-4">Curated guides, cheat sheets, and templates to accelerate your career.</p>
+            <div class="position-relative d-inline-block w-100" style="max-width: 600px;">
+                <input type="text" class="resource-search-input"
+                    placeholder="Search resources (e.g. 'React', 'Resume')...">
+                <i class="fa-solid fa-magnifying-glass position-absolute text-muted"
+                    style="right: 25px; top: 18px;"></i>
+            </div>
+        </div>
+    </section>
+
+    <div class="mobile-toolbar d-lg-none">
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+            <i class="fa-solid fa-bars me-1"></i> Menu
+        </button>
+        <a href="index.html" class="btn mobile-btn active text-decoration-none">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back to Feed
+        </a>
+    </div>
+
+    <div class="container px-lg-5 py-5">
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+            <div class="filter-tabs">
+                <div class="filter-tab active">All Resources</div>
+                <div class="filter-tab">Career Guides</div>
+                <div class="filter-tab">Tech Tutorials</div>
+                <div class="filter-tab">Templates</div>
+                <div class="filter-tab">Tools</div>
+            </div>
+            <button class="btn btn-nav-orange d-none d-md-flex text-white">
+                <i class="fa-solid fa-upload me-2"></i> Submit Resource
+            </button>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="forum-card resource-card">
+                    <div class="resource-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="resource-img" alt="Resume Template">
+                        <span class="resource-type bg-primary">Template</span>
+                    </div>
+                    <div class="resource-body">
+                        <h4 class="mb-2" style="font-size: 1.1rem;">ATS-Friendly Resume Template 2026</h4>
+                        <p class="small mb-3">A clean, parsed-friendly resume format designed to get you past automated
+                            screening bots.</p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3"
+                            style="border-color: var(--border-color) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                                    style="width:24px; height:24px; border-radius:50%;">
+                                <span class="small --text-muted">Sarah Jenkins</span>
+                            </div>
+                            <span class="small --text-muted"><i class="fa-solid fa-download me-1"></i> 2.5k</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="forum-card resource-card">
+                    <div class="resource-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="resource-img" alt="React Hooks">
+                        <span class="resource-type bg-success">Cheatsheet</span>
+                    </div>
+                    <div class="resource-body">
+                        <h4 class="mb-2" style="font-size: 1.1rem;">Complete React Hooks Cheatsheet</h4>
+                        <p class="small mb-3">Visual guide to useEffect, useState, useContext and custom hooks with code
+                            snippets.</p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3"
+                            style="border-color: var(--border-color) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                                    style="width:24px; height:24px; border-radius:50%;">
+                                <span class="small --text-muted">DevRahul</span>
+                            </div>
+                            <span class="small --text-muted"><i class="fa-solid fa-eye me-1"></i> 15k</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="forum-card resource-card">
+                    <div class="resource-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="resource-img" alt="Salary Negotiation">
+                        <span class="resource-type bg-warning text-dark">E-Book</span>
+                    </div>
+                    <div class="resource-body">
+                        <h4 class="mb-2" style="font-size: 1.1rem;">Salary Negotiation for Developers</h4>
+                        <p class="small mb-3">Scripts and strategies to increase your offer by 20% without losing the
+                            job offer.</p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3"
+                            style="border-color: var(--border-color) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/women/12.jpg"
+                                    style="width:24px; height:24px; border-radius:50%;">
+                                <span class="small --text-muted">Nina Patel</span>
+                            </div>
+                            <span class="small --text-muted"><i class="fa-solid fa-download me-1"></i> 890</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="forum-card resource-card">
+                    <div class="resource-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="resource-img" alt="Laravel Guide">
+                        <span class="resource-type bg-info text-white">Guide</span>
+                    </div>
+                    <div class="resource-body">
+                        <h4 class="mb-2" style="font-size: 1.1rem;">Laravel 11 Upgrade Guide</h4>
+                        <p class="small mb-3">Step-by-step instructions for upgrading your monolith from v10 to v11
+                            safely.</p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3"
+                            style="border-color: var(--border-color) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="/job/eagle-logo.png"
+                                    style="width:24px; height:24px; border-radius:50%; border: 1px solid var(--border-color);">
+                                <span class="small --text-muted">Uplynk Team</span>
+                            </div>
+                            <span class="small --text-muted"><i class="fa-solid fa-eye me-1"></i> 5.2k</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="forum-card resource-card">
+                    <div class="resource-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="resource-img" alt="Invoice Template">
+                        <span class="resource-type bg-secondary text-white">Finance</span>
+                    </div>
+                    <div class="resource-body">
+                        <h4 class="mb-2" style="font-size: 1.1rem;">Freelance Invoice Template (GST)</h4>
+                        <p class="small mb-3">Professional invoice template compliant with Indian GST laws for
+                            freelancers.</p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3"
+                            style="border-color: var(--border-color) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/men/85.jpg"
+                                    style="width:24px; height:24px; border-radius:50%;">
+                                <span class="small --text-muted">Amit Singh</span>
+                            </div>
+                            <span class="small --text-muted"><i class="fa-solid fa-download me-1"></i> 1.1k</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="forum-card resource-card">
+                    <div class="resource-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="resource-img" alt="UX Case Study">
+                        <span class="resource-type bg-primary">Portfolio</span>
+                    </div>
+                    <div class="resource-body">
+                        <h4 class="mb-2" style="font-size: 1.1rem;">UX Case Study Structure</h4>
+                        <p class="small mb-3">A Notion template to help you document your design process effectively.
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3"
+                            style="border-color: var(--border-color) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg"
+                                    style="width:24px; height:24px; border-radius:50%;">
+                                <span class="small --text-muted">Priya Sharma</span>
+                            </div>
+                            <span class="small --text-muted"><i class="fa-solid fa-copy me-1"></i> 340</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-5">
+            <button class="btn btn-nav-outline-blue px-5 rounded-pill">Load More Resources</button>
+        </div>
+
+    </div>
+
+    <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--primary-blue);">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="index.html" class="sidebar-nav-link"
+                style="color: var(--text-muted); display: block; padding: 10px; border-radius: 8px;"><i
+                    class="fa-solid fa-house me-2"></i> Home</a>
+            <a href="#" class="sidebar-nav-link active"
+                style="color: white; font-weight: 500; display: block; padding: 10px; border-radius: 8px;"><i
+                    class="fa-solid fa-book me-2"></i> Resources</a>
+            <hr style="border-color: var(--border-color); margin: 15px 0;">
+            <p class="small fw-bold text-uppercase px-3 mb-2" style="color: var(--text-muted); font-size: 0.75rem;">
+                Browse Communities</p>
+            <div class="sidebar-scroll-container">
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-comments text-primary"></i> General
+                    Discussion</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-map-marker-alt text-danger"></i> Local
+                    Community</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-hand-holding-heart text-success"></i> Advice
+                    & Support</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-laptop-code text-info"></i> Technology &
+                    Gadgets</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-house-chimney text-warning"></i> Housing</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-palette text-danger"></i> Hobbies &
+                    Interests</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-users text-primary"></i> Society &
+                    Culture</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-baby-carriage text-success"></i> Parenting &
+                    Family</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-heart-pulse text-danger"></i> Health &
+                    Wellness</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-utensils text-warning"></i> Food & Dining</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-plane text-info"></i> Travel & Lifestyle</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-primary"></i> Business</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-shirt text-danger"></i> Fashion & Beauty</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-film text-warning"></i> Entertainment</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-dumbbell text-success"></i> Sports &
+                    Fitness</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-music text-info"></i> Music & Art</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-gamepad text-primary"></i> Gaming &
+                    eSports</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-paw text-warning"></i> Pet Lovers</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-leaf text-success"></i> Environment</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-user-tie text-primary"></i> Career & Jobs</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-graduation-cap text-danger"></i>
+                    Education</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-coins text-warning"></i> Finance</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-scale-balanced text-info"></i> Legal</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-bullhorn text-muted"></i> Site Feedback</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        fetch("header.html").then(res => res.text()).then(data => document.getElementById("navbar").innerHTML = data);
+        fetch("footer.html").then(res => res.text()).then(data => document.getElementById("footer").innerHTML = data);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const icon = document.querySelector('#themeToggle i');
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a Discussion - Uplynk Community</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <div class="mobile-toolbar d-lg-none">
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+            <i class="fa-solid fa-bars"></i> Menu
+        </button>
+        <a href="index.html" class="btn mobile-btn active text-decoration-none">
+            <i class="fa-solid fa-times"></i> Cancel
+        </a>
+    </div>
+
+    <div class="container px-lg-5 py-5">
+        <div class="row g-4 mt-3">
+
+            <div class="col-lg-8">
+                <h2 class="page-title mb-4">Start a Discussion</h2>
+
+                <form action="#" method="POST">
+                    <div class="forum-card">
+
+                        <div class="mb-4">
+                            <label class="custom-label">Discussion Title <span class="text-danger">*</span></label>
+                            <input type="text" class="custom-input"
+                                placeholder="e.g. How do I fix the 419 error in Laravel 11?">
+                            <p class="helper-text">Be specific and imagine you’re asking a question to another person.
+                            </p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="custom-label">Body <span class="text-danger">*</span></label>
+                            <div class="editor-container">
+                                <div class="editor-toolbar">
+                                    <button type="button" class="toolbar-btn" title="Bold"><i
+                                            class="fa-solid fa-bold"></i></button>
+                                    <button type="button" class="toolbar-btn" title="Italic"><i
+                                            class="fa-solid fa-italic"></i></button>
+                                    <div style="width: 1px; background: var(--border-color); margin: 0 5px;"></div>
+                                    <button type="button" class="toolbar-btn" title="Link"><i
+                                            class="fa-solid fa-link"></i></button>
+                                    <button type="button" class="toolbar-btn" title="Image"><i
+                                            class="fa-regular fa-image"></i></button>
+                                    <button type="button" class="toolbar-btn" title="Code Block"><i
+                                            class="fa-solid fa-code"></i></button>
+                                    <div style="width: 1px; background: var(--border-color); margin: 0 5px;"></div>
+                                    <button type="button" class="toolbar-btn" title="List"><i
+                                            class="fa-solid fa-list-ul"></i></button>
+                                </div>
+                                <textarea class="editor-area"
+                                    placeholder="Include all the information someone would need to answer your question..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="custom-label">Tags</label>
+                            <input type="text" class="custom-input" placeholder="e.g. #php, #api, #error">
+                            <p class="helper-text">Add up to 5 tags to describe what your question is about.</p>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-3 pt-2">
+                            <a href="index.html" class="btn btn-link link-reset"
+                                style="color: var(--text-muted); align-self: center;">Cancel</a>
+                            <button type="submit" class="btn btn-nav-orange px-4 py-2">Post Discussion</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="info-box mb-4">
+                    <h5 class="info-title"><i class="fa-solid fa-pen-nib me-2"></i> Posting Guidelines</h5>
+                    <div class="d-flex flex-column">
+                        <div class="info-list-item">
+                            <i class="fa-solid fa-check text-success"></i>
+                            <span><strong>Be Specific:</strong> Titles like "Help me" don't get answers.</span>
+                        </div>
+                        <div class="info-list-item">
+                            <i class="fa-solid fa-check text-success"></i>
+                            <span><strong>Show Code:</strong> If it's a technical question, paste the relevant code
+                                block.</span>
+                        </div>
+                        <div class="info-list-item">
+                            <i class="fa-solid fa-check text-success"></i>
+                            <span><strong>Search First:</strong> Your question might have been answered already.</span>
+                        </div>
+                        <div class="info-list-item">
+                            <i class="fa-solid fa-check text-success"></i>
+                            <span><strong>Be Polite:</strong> We are a professional community.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forum-card">
+                    <h6 class="card-title">Markdown Cheatsheet</h6>
+                    <table class="w-100 markdown-table">
+                        <tbody>
+                            <tr>
+                                <td>**bold**</td>
+                                <td class="fw-bold text-end">bold</td>
+                            </tr>
+                            <tr>
+                                <td>*italic*</td>
+                                <td class="fst-italic text-end">italic</td>
+                            </tr>
+                            <tr>
+                                <td>[Link](url)</td>
+                                <td class="text-primary text-end">Link</td>
+                            </tr>
+                            <tr>
+                                <td>`code`</td>
+                                <td class="text-end"><code>code</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--primary-blue);">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="index.html" class="btn btn-nav-outline-blue w-100 mb-3">Back to Feed</a>
+            <hr style="border-color: var(--border-color);">
+            <p class="small fw-bold text-uppercase px-3 mb-2" style="color: var(--text-muted); font-size: 0.75rem;">
+                Browse Communities</p>
+            <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-comments text-primary"></i> General
+                    Discussion</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-map-marker-alt text-danger"></i> Local
+                    Community</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-hand-holding-heart text-success"></i> Advice
+                    & Support</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-laptop-code text-info"></i> Technology &
+                    Gadgets</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-house-chimney text-warning"></i> Housing</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-palette text-danger"></i> Hobbies &
+                    Interests</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-users text-primary"></i> Society &
+                    Culture</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-baby-carriage text-success"></i> Parenting &
+                    Family</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-heart-pulse text-danger"></i> Health &
+                    Wellness</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-utensils text-warning"></i> Food & Dining</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-plane text-info"></i> Travel & Lifestyle</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-primary"></i> Business</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-shirt text-danger"></i> Fashion & Beauty</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-film text-warning"></i> Entertainment</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-dumbbell text-success"></i> Sports &
+                    Fitness</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-music text-info"></i> Music & Art</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-gamepad text-primary"></i> Gaming &
+                    eSports</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-paw text-warning"></i> Pet Lovers</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-leaf text-success"></i> Environment</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-user-tie text-primary"></i> Career & Jobs</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-graduation-cap text-danger"></i>
+                    Education</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-coins text-warning"></i> Finance</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-scale-balanced text-info"></i> Legal</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-bullhorn text-muted"></i> Site Feedback</a>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const icon = document.querySelector('#themeToggle i');
+            if (!icon) return;
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        Promise.all([
+            fetch("header.html").then(res => res.text()).then(data => document.getElementById("navbar").innerHTML = data),
+            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("footer").innerHTML = data)
+        ]);
+    </script>
+</body>
+
+</html>

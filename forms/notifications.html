@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Uplynk Community</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* --- SHARED CSS (Same as previous pages) --- */
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --surface-color: #f9fafb;
+            --text-main: #1f2937;
+            --test-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --primary-blue: #2563EB;
+            --success-green: #10b981;
+            --brand-orange: #F97316;
+            --brand-orange-hover: #ea580c;
+            --dark-strip-bg: #000000;
+            --bg-body-forum: #f3f4f6;
+            --primary-color: #2563EB;
+            --secondary-color: #1d4ed8;
+            /* Notification Specific */
+            --unread-bg: #eff6ff; /* Light blue highlight */
+            --unread-border: #dbeafe;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-main: #f3f4f6;
+            --test-muted: #9ca3af;
+            --border-color: #374151;
+            --primary-blue: #3b82f6;
+            --success-green: #34d399;
+            --brand-orange: #fb923c;
+            --brand-orange-hover: #f97316;
+            --dark-strip-bg: #1e293b;
+            --bg-body-forum: #0f172a;
+            --primary-color: #3b82f6;
+            --secondary-color: #60a5fa;
+            /* Notification Specific */
+            --unread-bg: #1e3a8a;
+            --unread-border: #1e40af;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body-forum);
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 { color: var(--text-main); font-weight: 700; }
+        p { color: var(--test-muted); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+
+        /* --- NAVBAR --- */
+        .navbar { background-color: var(--bg-color); border-bottom: 1px solid var(--border-color); padding: 12px 0; z-index: 1000; }
+        .navbar-brand { font-weight: 800; font-size: 1.5rem; color: var(--primary-blue) !important; display: flex; align-items: center; gap: 10px; text-transform: uppercase; }
+        .navbar-nav .nav-link { color: var(--test-muted) !important; font-weight: 500; margin: 0 10px; font-size: 0.95rem; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--text-main) !important; }
+        
+        .btn-nav-outline-blue { color: var(--primary-blue); border: 1px solid var(--primary-blue); background: transparent; font-weight: 600; border-radius: 6px; padding: 8px 16px; }
+        .btn-nav-outline-blue:hover { background-color: var(--primary-blue); color: #fff; }
+        .btn-nav-orange { background-color: var(--brand-orange); color: #fff; border: 1px solid var(--brand-orange); font-weight: 600; border-radius: 6px; padding: 8px 16px; display: flex; align-items: center; gap: 6px; }
+        .btn-nav-orange:hover { background-color: var(--brand-orange-hover); color: #fff; }
+
+        /* --- SIDEBAR --- */
+        .sidebar-nav-link { display: flex; align-items: center; gap: 12px; padding: 10px 15px; color: var(--test-muted); font-weight: 500; border-radius: 8px; transition: all 0.2s; }
+        .sidebar-nav-link:hover { background-color: var(--surface-color); color: var(--primary-blue); }
+        .sidebar-nav-link.active { background-color: var(--primary-blue); color: #fff; }
+        .sidebar-nav-link i { width: 20px; text-align: center; }
+
+        /* --- NOTIFICATION STYLES --- */
+        .forum-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .notification-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .notif-filter-btn {
+            background: none; border: none; color: var(--test-muted); font-weight: 600; font-size: 0.9rem; padding: 5px 10px; border-radius: 6px;
+        }
+        .notif-filter-btn.active { background-color: var(--surface-color); color: var(--primary-blue); }
+        .notif-filter-btn:hover { color: var(--text-main); }
+
+        .notification-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: start; gap: 15px;
+            transition: background-color 0.2s;
+            position: relative;
+        }
+        .notification-item:hover { background-color: var(--surface-color); }
+        .notification-item:last-child { border-bottom: none; }
+        
+        /* Unread State */
+        .notification-item.unread {
+            background-color: var(--unread-bg);
+        }
+        .notification-item.unread::before {
+            content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background-color: var(--primary-blue);
+        }
+
+        .notif-avatar {
+            width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+        }
+        .notif-icon-badge {
+            position: absolute; bottom: -2px; right: -2px;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.65rem; color: white; border: 2px solid var(--bg-color);
+        }
+        
+        .bg-reply { background-color: var(--primary-blue); }
+        .bg-like { background-color: var(--success-green); }
+        .bg-mention { background-color: var(--brand-orange); }
+
+        .notif-content p { margin-bottom: 0; font-size: 0.95rem; color: var(--text-main); }
+        .notif-meta { font-size: 0.8rem; color: var(--test-muted); margin-top: 4px; }
+        .notif-preview {
+            margin-top: 5px; font-size: 0.9rem; color: var(--test-muted);
+            border-left: 3px solid var(--border-color); padding-left: 10px;
+            display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        /* --- FOOTER & RESPONSIVE --- */
+        @media (max-width: 991px) {
+            .mobile-toolbar { display: flex; }
+            .offcanvas-custom { background-color: var(--bg-color); color: var(--text-main); }
+            .container-fluid { padding-left: 10px; padding-right: 10px; }
+        }
+        
+        .footer { background-color: var(--surface-color); border-top: 1px solid var(--border-color); margin-top: auto; }
+        .email-list a { text-decoration: none; color: var(--test-muted); font-size: 0.9rem; margin-bottom: 2px; }
+        .email-list a:hover { text-decoration: underline; color: var(--primary-blue); }
+        .footer-link { color: var(--test-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-link:hover { color: var(--primary-blue); }
+        .social-links a { font-size: 1.2rem; color: var(--primary-blue); margin-right: 15px; transition: transform 0.2s; display: inline-block; }
+        .social-links a:hover { transform: translateY(-3px); }
+        .logo-dark { display: none; }
+        [data-theme='dark'] .logo-light { display: none; }
+        [data-theme='dark'] .logo-dark { display: block; }
+        
+        .scroll-top { position: fixed; visibility: hidden; opacity: 0; right: 15px; bottom: 15px; z-index: 99999; background: var(--brand-orange); width: 40px; height: 40px; border-radius: 4px; transition: all 0.4s; }
+        .scroll-top:hover { background: var(--brand-orange-hover); color: #fff; }
+        .scroll-top.active { visibility: visible; opacity: 1; }
+        .scroll-top i { font-size: 20px; line-height: 40px; color: white; }
+
+        .mobile-toolbar { display: none; background-color: var(--bg-color); border-bottom: 1px solid var(--border-color); padding: 10px 15px; overflow-x: auto; white-space: nowrap; position: sticky; top: 76px; z-index: 990; }
+        .mobile-btn { background-color: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-main); padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; margin-right: 8px; font-weight: 600; }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="d-flex align-items-center text-decoration-none" href="#">
+                <img src="/job/eagle-logo.png" alt="L" class="me-2 logo-img" style="border-radius: 4px; height: 40px;">
+                <span class="navbar-brand mb-0 h1 brand-text">FORUMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <i class="fa-solid fa-bars" style="color: var(--test-muted);"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link active" style="color: var(--primary-blue) !important;" href="#">Community</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Explore</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tech Talk</a></li>
+                            <li><a class="dropdown-item" href="#">Career Advice</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                </ul>
+                <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3 mt-3 mt-lg-0">
+                    <div class="d-flex align-items-center gap-2 border px-3 py-1 rounded-pill" style="border-color: var(--border-color) !important;">
+                        <img src="https://randomuser.me/api/portraits/men/86.jpg" width="30" height="30" class="rounded-circle">
+                        <span class="small fw-bold" style="color: var(--text-main);">DevRahul</span>
+                    </div>
+                    <a href="create-thread.html" class="btn btn-nav-orange"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="btn border-0 p-0" onclick="toggleTheme()" id="themeToggle" style="color: var(--text-main);">
+                        <i class="fa-solid fa-moon fs-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-toolbar d-lg-none">
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+            <i class="fa-solid fa-bars me-1"></i> Menu
+        </button>
+        <a href="index.html" class="btn mobile-btn active">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back to Feed
+        </a>
+    </div>
+
+    <div class="container px-lg-5 py-4">
+        <div class="row g-4">
+            
+            <div class="col-lg-2 d-none d-lg-block">
+                <div style="position: sticky; top: 100px;">
+                    <a href="index.html" class="sidebar-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="profile.html" class="sidebar-nav-link"><i class="fa-solid fa-user"></i> Profile</a>
+                    <a href="#" class="sidebar-nav-link text-primary"><i class="fa-solid fa-bell"></i> Notifications</a>
+                    <hr style="border-color: var(--border-color); margin: 15px 0;">
+                    <p class="small fw-bold text-uppercase px-3 mb-2" style="color: var(--test-muted); font-size: 0.75rem;">My Communities</p>
+                    <a href="#" class="sidebar-nav-link"><i class="fa-brands fa-laravel text-danger"></i> Laravel</a>
+                    <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-success"></i> Careers</a>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-12">
+                
+                <div class="forum-card p-0">
+                    <div class="notification-header">
+                        <h5 class="mb-0">Notifications</h5>
+                        <div class="d-flex gap-2">
+                            <button class="notif-filter-btn active">All</button>
+                            <button class="notif-filter-btn">Replies</button>
+                            <button class="notif-filter-btn">Mentions</button>
+                        </div>
+                    </div>
+
+                    <div class="notification-item unread">
+                        <div class="position-relative">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" class="notif-avatar">
+                            <div class="notif-icon-badge bg-reply"><i class="fa-solid fa-reply"></i></div>
+                        </div>
+                        <div class="notif-content flex-grow-1">
+                            <p><strong>Priya Sharma</strong> replied to your post: <strong>Getting 419 Page Expired...</strong></p>
+                            <div class="notif-preview">"Yes, for Fetch API you need to grab the content of the meta tag..."</div>
+                            <div class="notif-meta">25 minutes ago</div>
+                        </div>
+                        <i class="fa-solid fa-circle text-primary" style="font-size: 0.5rem; margin-top: 8px;"></i>
+                    </div>
+
+                    <div class="notification-item unread">
+                        <div class="position-relative">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" class="notif-avatar">
+                            <div class="notif-icon-badge bg-mention"><i class="fa-solid fa-at"></i></div>
+                        </div>
+                        <div class="notif-content flex-grow-1">
+                            <p><strong>Rahul Verma</strong> mentioned you in <strong>Best Laravel practices</strong></p>
+                            <div class="notif-preview">"I think @DevRahul had a similar issue last week regarding queues..."</div>
+                            <div class="notif-meta">1 hour ago</div>
+                        </div>
+                        <i class="fa-solid fa-circle text-primary" style="font-size: 0.5rem; margin-top: 8px;"></i>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="position-relative">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="notif-avatar">
+                            <div class="notif-icon-badge bg-like"><i class="fa-solid fa-heart"></i></div>
+                        </div>
+                        <div class="notif-content flex-grow-1">
+                            <p><strong>Amit Singh</strong> liked your comment in <strong>Vue vs React</strong></p>
+                            <div class="notif-meta">5 hours ago</div>
+                        </div>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="position-relative">
+                            <img src="/job/eagle-logo.png" class="notif-avatar" style="border: 1px solid var(--border-color);">
+                            <div class="notif-icon-badge bg-warning text-dark"><i class="fa-solid fa-trophy"></i></div>
+                        </div>
+                        <div class="notif-content flex-grow-1">
+                            <p><strong>Congratulations!</strong> You earned the "First 10 Posts" badge.</p>
+                            <div class="notif-meta">1 day ago</div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 text-center border-top" style="border-color: var(--border-color) !important;">
+                        <button class="btn btn-sm btn-link text-decoration-none">Mark all as read</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-2 d-none d-lg-block">
+                <div class="small text-muted">
+                    <p class="mb-2 fw-bold">Tips</p>
+                    <p>You can manage your notification preferences in <a href="#" class="text-primary">Settings</a>.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--primary-blue);">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="index.html" class="sidebar-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="profile.html" class="sidebar-nav-link"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="notifications.html" class="sidebar-nav-link text-primary"><i class="fa-solid fa-bell"></i> Notifications</a>
+            <hr style="border-color: var(--border-color); margin: 15px 0;">
+            <p class="small fw-bold text-uppercase px-3 mb-2" style="color: var(--test-muted); font-size: 0.75rem;">My Communities</p>
+            <a href="#" class="sidebar-nav-link"><i class="fa-brands fa-laravel text-danger"></i> Laravel</a>
+            <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-success"></i> Careers</a>
+        </div>
+    </div>
+
+    <footer id="footer" class="footer py-5">
+        <div class="container">
+            <div class="row gy-4 mb-4">
+                <div class="col-lg-3 col-md-6">
+                    <a href="/" class="d-flex align-items-center mb-3 brand-logo-container text-decoration-none">
+                        <img src="/job/eagle-logo.png" alt="UPLYNK Logo" height="55px" class="brand-logo logo-light">
+                        <img src="/job/eagle-logo.png" alt="UPLYNK Logo" height="55px" class="brand-logo logo-dark" style="filter: brightness(0) invert(1);">
+                    </a>
+                    <p class="text-muted mb-3" style="color: var(--test-muted) !important;">
+                        Empowering Digital India through AI-driven connectivity, innovation, and community growth.
+                    </p>
+                    <p class="mb-2">
+                        <i class="fa-solid fa-phone me-2" style="color: var(--text-main);"></i>
+                        <a href="tel:+919022577005" class="text-decoration-none" style="color: var(--text-main);">+91 9022577005</a>
+                    </p>
+                    <div class="d-flex align-items-start mb-3 email-container">
+                        <i class="fas fa-envelope me-2 mt-1" style="color: var(--text-main);"></i>
+                        <div class="d-flex flex-column email-list">
+                            <strong class="mb-1 email" style="color: var(--text-main);">Email:</strong>
+                            <a href="mailto:support@uplynkindia.com">support@uplynkindia.com</a>
+                            <a href="mailto:info@uplynkindia.com">info@uplynkindia.com</a>
+                            <a href="mailto:grievance@uplynkindia.com">grievance@uplynkindia.com</a>
+                            <a href="mailto:refunds@uplynkindia.com">refunds@uplynkindia.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-semibold my-3 text-primary" style="color: var(--primary-blue) !important;">QUICK LINKS</h5>
+                    <ul class="list-unstyled mb-2 d-flex flex-column gap-2">
+                        <li><a href="/" class="footer-link">Home</a></li>
+                        <li><a href="/about" class="footer-link">About</a></li>
+                        <li><a href="/contact" class="footer-link">Contact</a></li>
+                        <li><a href="#" class="footer-link">General Disclaimer</a></li>
+                        <li><a href="#" class="footer-link">Legal Disclaimer</a></li>
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-semibold my-3 text-primary" style="color: var(--primary-blue) !important;">SERVICES</h5>
+                    <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+                        <li><a href="/matrimony" class="footer-link">Matrimony</a></li>
+                        <li><a href="/classified" class="footer-link">Classifieds</a></li>
+                        <li><a href="/jobs" class="footer-link">Jobs</a></li>
+                        <li><a href="/forums" class="footer-link">Forums</a></li>
+                        <li><a href="/news" class="footer-link">News</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 text-lg-start">
+                    <h5 class="fw-semibold my-3 text-primary" style="color: var(--primary-blue) !important;">CONNECT WITH US</h5>
+                    <div class="social-links justify-content-lg-start">
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-4 border-top small" style="border-color: var(--border-color) !important;">
+                <p class="mt-3 mb-0" style="color: var(--test-muted) !important;">&copy; Powered by
+                    <a href="http://www.uplynknetworks.com/" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: none;">Uplynk Networks Pvt. Ltd.</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center text-decoration-none">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const icon = document.querySelector('#themeToggle i');
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+        const scrollTop = document.getElementById("scroll-top");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                scrollTop.classList.add("active");
+            } else {
+                scrollTop.classList.remove("active");
+            }
+        });
+    </script>
+</body>
+</html>

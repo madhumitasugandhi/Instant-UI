@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Hub - Uplynk</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .post-action-link {
+            text-decoration: none;
+            color: var(--text-muted) !important;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 8px;
+            border-radius: 6px;
+        }
+
+        .post-action-link:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--primary-blue) !important;
+        }
+
+        [data-theme="dark"] .post-action-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .like-btn.active {
+            color: #2EB872 !important;
+        }
+
+        .dislike-btn.active {
+            color: #e74c3c !important;
+        }
+
+        .save-btn.active {
+            color: var(--brand-orange) !important;
+        }
+
+        .forum-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--card-bg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <div class="container py-4 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+
+                <div class="text-center mb-4 mt-3">
+                    <h2 class="fw-bold">Community Hub</h2>
+                    <p class="text-muted">Connect, Share, and Grow with the Uplynk Community.</p>
+                </div>
+
+                <ul class="nav nav-pills justify-content-center mb-4 gap-2" id="communityTabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="btn btn-nav-outline-blue active px-4 rounded-pill" data-bs-toggle="pill"
+                            data-bs-target="#general-posts">General Posts</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-nav-outline-blue px-4 rounded-pill" data-bs-toggle="pill"
+                            data-bs-target="#community-posts">Community Posts</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane fade show active" id="general-posts">
+
+                        <div class="forum-card p-3 mb-4 create-post-wrapper d-flex align-items-center gap-3">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="user-avatar" width="40"
+                                height="40">
+                            <div class="fake-input flex-grow-1 text-muted small p-2 border rounded"
+                                style="cursor: pointer; background: var(--surface-color);">Start a discussion...</div>
+                            <i class="fa-regular fa-image text-muted fs-5"></i>
+                        </div>
+
+                        <div class="forum-card p-3 mb-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" width="35" height="35"
+                                    class="rounded-circle me-2">
+                                <div>
+                                    <div class="fw-bold small">Sarah Jenkins</div><small class="text-muted">4h ago •
+                                        Public</small>
+                                </div>
+                                <span class="tag-pill ms-auto">#Career</span>
+                            </div>
+                            <h5 class="mb-2">How to handle salary negotiations for remote US startups?</h5>
+                            <p class="small text-muted"> बेंचमार्क करने का सही तरीका क्या है? Advice needed for Indian
+                                developers.</p>
+
+                            <hr class="my-3 opacity-25">
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div class="d-flex gap-2">
+                                    <a href="javascript:void(0)" class="post-action-link like-btn"
+                                        onclick="this.classList.toggle('active')"><i
+                                            class="fa-regular fa-thumbs-up"></i> 1.2k</a>
+                                    <a href="javascript:void(0)" class="post-action-link dislike-btn"
+                                        onclick="this.classList.toggle('active')"><i
+                                            class="fa-regular fa-thumbs-down"></i> 12</a>
+                                    <a href="#" class="post-action-link"><i class="fa-regular fa-comment"></i> 42</a>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <span class="post-action-link"><i class="fa-regular fa-eye"></i> 5.6k</span>
+                                    <a href="#" class="post-action-link"><i class="fa-solid fa-share-nodes"></i>
+                                        Share</a>
+                                    <a href="javascript:void(0)" class="post-action-link save-btn"
+                                        onclick="this.classList.toggle('active')"><i
+                                            class="fa-regular fa-bookmark"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="forum-card p-3 mb-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" width="35" height="35"
+                                    class="rounded-circle me-2">
+                                <div>
+                                    <div class="fw-bold small">Admin</div><small class="text-muted">10h ago • <i
+                                            class="fa-solid fa-circle-check text-primary"></i> Verified</small>
+                                </div>
+                            </div>
+                            <h5 class="mb-2">New Hackathon Prizes Announced!</h5>
+                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80"
+                                class="img-fluid rounded mb-3"
+                                style="max-height: 250px; width: 100%; object-fit: cover;">
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="post-action-link like-btn active"><i
+                                            class="fa-solid fa-thumbs-up"></i> 3.4k</a>
+                                    <a href="#" class="post-action-link dislike-btn"><i
+                                            class="fa-regular fa-thumbs-down"></i> 2</a>
+                                    <a href="#" class="post-action-link"><i class="fa-regular fa-comment"></i> 156</a>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <span class="post-action-link"><i class="fa-regular fa-eye"></i> 20k</span>
+                                    <a href="#" class="post-action-link"><i class="fa-solid fa-share-nodes"></i>
+                                        Share</a>
+                                    <a href="#" class="post-action-link"><i class="fa-regular fa-bookmark"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="community-posts">
+
+                        <div class="forum-card p-3 mb-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                    style="width: 35px; height: 35px; font-size: 12px;">JS</div>
+                                <div>
+                                    <div class="fw-bold small">JavaScript India</div><small class="text-muted">Posted by
+                                        Rahul • 2h ago</small>
+                                </div>
+                            </div>
+                            <h5 class="mb-2">Is React 19 actually faster?</h5>
+                            <p class="small text-muted">I've been testing the compiler and here are my results...</p>
+                            <hr class="my-3 opacity-25">
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="post-action-link like-btn"><i
+                                            class="fa-regular fa-thumbs-up"></i> 210</a>
+                                    <a href="#" class="post-action-link dislike-btn"><i
+                                            class="fa-regular fa-thumbs-down"></i> 5</a>
+                                    <a href="#" class="post-action-link"><i class="fa-regular fa-comment"></i> 89</a>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <span class="post-action-link"><i class="fa-regular fa-eye"></i> 1.5k</span>
+                                    <a href="#" class="post-action-link"><i class="fa-solid fa-share-nodes"></i>
+                                        Share</a>
+                                    <a href="#" class="post-action-link"><i class="fa-regular fa-bookmark"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="forum-card p-3 mb-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                    style="width: 35px; height: 35px;"><i class="fa-brands fa-laravel"></i></div>
+                                <div>
+                                    <div class="fw-bold small">Laravel Developers</div><small class="text-muted">Posted
+                                        by Admin • 5h ago</small>
+                                </div>
+                            </div>
+                            <h5 class="mb-2">How to optimize Eloquent Queries?</h5>
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-4">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="post-action-link like-btn"><i
+                                            class="fa-regular fa-thumbs-up"></i> 1.1k</a>
+                                    <a href="#" class="post-action-link dislike-btn"><i
+                                            class="fa-regular fa-thumbs-down"></i> 0</a>
+                                    <a href="#" class="post-action-link"><i class="fa-regular fa-comment"></i> 120</a>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <span class="post-action-link"><i class="fa-regular fa-eye"></i> 15k</span>
+                                    <a href="#" class="post-action-link"><i class="fa-solid fa-share-nodes"></i>
+                                        Share</a>
+                                    <a href="#" class="post-action-link"><i class="fa-regular fa-bookmark"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="text-center pb-5 mt-4">
+                    <button class="btn btn-outline-primary rounded-pill px-5">Load More</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        Promise.all([
+            fetch("header.html").then(res => res.text()).then(data => document.getElementById("navbar").innerHTML = data),
+            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("footer").innerHTML = data)
+        ]);
+    </script>
+</body>
+
+</html>

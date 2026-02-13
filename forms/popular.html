@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORUMS - Uplynk Community</title>
+    <title>Popular Topics - Uplynk Community</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -22,11 +22,8 @@
         <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
             <i class="fa-solid fa-bars me-1"></i> Menu
         </button>
-        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
-            <i class="fa-solid fa-fire me-1"></i> Trending
-        </button>
-        <button class="btn mobile-btn active">
-            <i class="fa-solid fa-house me-1"></i> Feed
+        <button class="btn mobile-btn active" type="button">
+            <i class="fa-solid fa-fire me-1"></i> Popular
         </button>
     </div>
 
@@ -35,10 +32,9 @@
 
             <div class="col-lg-2 d-none d-lg-block">
                 <div style="position: sticky; top: 100px;">
-                    <a href="#" class="sidebar-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
-                    <a href="popular.html" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
-                    <a href="faq.html" class="sidebar-nav-link"><i class="fa-solid fa-tags"></i>Question & Answers</a>
-
+                    <a href="index.html" class="sidebar-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="popular.html" class="sidebar-nav-link active"><i class="fa-solid fa-fire"></i> Popular</a>
+                    <a href="faq.html" class="sidebar-nav-link"><i class="fa-solid fa-tags"></i>Qestion & Answers</a>
                     <hr style="border-color: var(--border-color); margin: 15px 0;">
 
                     <p class="small fw-bold text-uppercase px-3 mb-2"
@@ -96,125 +92,132 @@
 
             <div class="col-lg-7 col-12">
 
-                <div class="mb-3 mt-4  position-relative">
-                    <input type="text" class="forum-search-input"
-                        placeholder="Search questions, topics, or hashtags...">
-                    <i class="fa-solid fa-magnifying-glass position-absolute"
-                        style="right: 15px; top: 15px; color: var(--text-muted);"></i>
+                <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 mt-4">
+                    <h3 class="mb-0"><i class="fa-solid fa-fire text-danger me-2"></i> Popular This Week</h3>
+
+                    <div class="d-flex gap-2 mt-2 mt-md-0">
+                        <button class="time-filter-btn">Today</button>
+                        <button class="time-filter-btn active">Week</button>
+                        <button class="time-filter-btn">Month</button>
+                        <button class="time-filter-btn">All Time</button>
+                    </div>
                 </div>
 
-                <div class="forum-card create-post-wrapper">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="user-avatar" alt="User">
-                    <div class="fake-input">What's on your mind? Share a link or question...</div>
-                    <button class="btn btn-nav-outline-blue border-0"><i class="fa-regular fa-image fs-5"></i></button>
-                    <button class="btn btn-nav-outline-blue border-0"><i class="fa-solid fa-link fs-5"></i></button>
-                </div>
-
-                <div class="d-flex gap-2 mb-3">
-                    <button class="btn btn-sm btn-nav-outline-blue active">New</button>
-                    <button class="btn btn-sm btn-nav-outline-blue border-0">Top</button>
-                    <button class="btn btn-sm btn-nav-outline-blue border-0">Hot</button>
-                </div>
-
-                <div class="forum-card p-0 overflow-hidden mb-3">
+                <div class="forum-card p-0 overflow-hidden">
                     <div class="d-flex">
-
+                        <div class="vote-sidebar pt-3 bg-surface border-end"
+                            style="border-color: var(--border-color) !important; background-color: var(--surface-color);">
+                            <i class="fa-solid fa-caret-up vote-btn fs-4 text-danger"></i>
+                            <span class="vote-count" style="color: var(--brand-orange);">3.2k</span>
+                            <i class="fa-solid fa-caret-down vote-btn fs-4"></i>
+                        </div>
                         <div class="p-3 flex-grow-1">
                             <div class="d-flex align-items-center mb-2">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" width="20" height="20"
+                                <img src="https://randomuser.me/api/portraits/men/85.jpg" width="20" height="20"
                                     class="rounded-circle me-2">
-                                <span class="small fw-bold me-2">Sarah Jenkins</span>
-                                <span class="small text-muted" style="color: var(--text-muted) !important;">• 4 hours
+                                <span class="small fw-bold me-2">TechLead_Ravi</span>
+                                <span class="small text-muted" style="color: var(--text-muted) !important;">• 2 days
                                     ago</span>
-                                <span class="tag-pill ms-auto">#Career&Jobs</span>
+                                <span class="tag-pill ms-auto">#Technology</span>
                             </div>
-                            <h5 class="mb-2"><a href="thread-detail.html" class="text-decoration-none text-reset">How to
-                                    handle salary negotiations for a remote US startup from India?</a></h5>
-                            <p class="small mb-3">I recently got an offer from a Series A startup based in SF. How
-                                should I benchmark the base salary?</p>
-
-                            <div class="d-flex align-items-center gap-3">
-                                <a href="javascript:void(0)" class="text-muted small text-decoration-none"
-                                    onclick="this.classList.toggle('text-success')">
-                                    <i class="fa-regular fa-thumbs-up me-1"></i> Like
-                                </a>
-                                <a href="javascript:void(0)" class="text-muted small text-decoration-none"
-                                    onclick="this.classList.toggle('text-danger')">
-                                    <i class="fa-regular fa-thumbs-down me-1"></i> Dislike
-                                </a>
-                                <a href="#" class="text-muted small text-decoration-none">
-                                    <i class="fa-regular fa-comment-alt me-1"></i> 42
-                                </a>
-                                <span class="text-muted small">
-                                    <i class="fa-regular fa-eye me-1"></i> 5.6k
-                                </span>
-                                <a href="#" class="text-muted small text-decoration-none">
-                                    <i class="fa-solid fa-share-nodes me-1"></i> Share
-                                </a>
-                                <a href="javascript:void(0)" class="text-muted small text-decoration-none ms-auto"
-                                    onclick="this.classList.toggle('text-warning')">
-                                    <i class="fa-regular fa-bookmark"></i>
-                                </a>
+                            <h5 class="mb-2"><a href="thread-detail.html" class="text-decoration-none text-reset">Why
+                                    everyone
+                                    is suddenly moving back to Bangalore from Remote?</a></h5>
+                            <p class="small mb-3">Is it just me or are all major startups calling people back to office?
+                                Let's discuss the pros and cons of the current hybrid shift in 2026.</p>
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                class="img-fluid rounded mb-3"
+                                style="max-height: 250px; width: 100%; object-fit: cover;">
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-regular fa-comment-alt me-1"></i> 842 Comments</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-solid fa-share-nodes me-1"></i> Share</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i class="fa-solid fa-reply me-1"></i>
+                                    Reply</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="forum-card p-0 overflow-hidden mb-3">
+                <div class="forum-card p-0 overflow-hidden">
                     <div class="d-flex">
-                        
+                        <div class="vote-sidebar pt-3 bg-surface border-end"
+                            style="border-color: var(--border-color) !important; background-color: var(--surface-color);">
+                            <i class="fa-solid fa-caret-up vote-btn fs-4 text-danger"></i>
+                            <span class="vote-count" style="color: var(--brand-orange);">1.5k</span>
+                            <i class="fa-solid fa-caret-down vote-btn fs-4"></i>
+                        </div>
                         <div class="p-3 flex-grow-1">
                             <div class="d-flex align-items-center mb-2">
-                                <span class="small fw-bold me-2 text-success"><i class="fa-solid fa-thumbtack me-1"></i>
-                                    Pinned</span>
-                                <span class="small text-muted" style="color: var(--text-muted) !important;">• Uplynk
-                                    Official</span>
+                                <span class="small fw-bold me-2">FinanceGuru</span>
+                                <span class="small text-muted" style="color: var(--text-muted) !important;">• 4 days
+                                    ago</span>
+                                <span class="tag-pill ms-auto">#Finance</span>
                             </div>
-                            <h5 class="mb-2"><a href="thread-detail.html" class="text-decoration-none text-reset">New
-                                    Feature: Verified "Startup Ready" Badge</a></h5>
-                            <p class="small mb-3">We have launched a new assessment test. Passing this gives you a
-                                verified badge.</p>
+                            <h5 class="mb-2"><a href="thread-detail.html" class="text-decoration-none text-reset">Crypto
+                                    regulation updates in India: What you need to know</a></h5>
+                            <p class="small mb-3">A simplified breakdown of the new tax laws introduced this week
+                                regarding digital assets and freelance payments.</p>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-regular fa-comment-alt me-1"></i> 320 Comments</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-solid fa-share-nodes me-1"></i> Share</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i class="fa-solid fa-reply me-1"></i>
+                                    Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                class="img-fluid rounded mb-3"
-                                style="max-height: 250px; width: 100%; object-fit: cover;">
-
-                            <div class="d-flex align-items-center gap-3">
-                                <a href="javascript:void(0)" class="text-muted small text-decoration-none"
-                                    onclick="this.classList.toggle('text-success')">
-                                    <i class="fa-regular fa-thumbs-up me-1"></i> 850
-                                </a>
-                                <a href="javascript:void(0)" class="text-muted small text-decoration-none"
-                                    onclick="this.classList.toggle('text-danger')">
-                                    <i class="fa-regular fa-thumbs-down me-1"></i> 2
-                                </a>
-                                <a href="#" class="text-muted small text-decoration-none">
-                                    <i class="fa-regular fa-comment-alt me-1"></i> 156
-                                </a>
-                                <span class="text-muted small">
-                                    <i class="fa-regular fa-eye me-1"></i> 12k
-                                </span>
-                                <a href="#" class="text-muted small text-decoration-none">
-                                    <i class="fa-solid fa-share-nodes me-1"></i> Share
-                                </a>
-                                <a href="javascript:void(0)" class="text-muted small text-decoration-none ms-auto"
-                                    onclick="this.classList.toggle('text-warning')">
-                                    <i class="fa-regular fa-bookmark"></i>
-                                </a>
+                <div class="forum-card p-0 overflow-hidden">
+                    <div class="d-flex">
+                        <div class="vote-sidebar pt-3 bg-surface border-end"
+                            style="border-color: var(--border-color) !important; background-color: var(--surface-color);">
+                            <i class="fa-solid fa-caret-up vote-btn fs-4"></i>
+                            <span class="vote-count">980</span>
+                            <i class="fa-solid fa-caret-down vote-btn fs-4"></i>
+                        </div>
+                        <div class="p-3 flex-grow-1">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="small fw-bold me-2">Sarah Jenkins</span>
+                                <span class="small text-muted" style="color: var(--text-muted) !important;">• 5 days
+                                    ago</span>
+                                <span class="tag-pill ms-auto">#Career</span>
+                            </div>
+                            <h5 class="mb-2"><a href="thread-detail.html" class="text-decoration-none text-reset">Resume
+                                    review: I applied to 50 companies and got 0 calls.</a></h5>
+                            <p class="small mb-3">Please roast my resume. I have 3 years of experience in MERN stack but
+                                feeling stuck.</p>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-regular fa-comment-alt me-1"></i> 112 Comments</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i
+                                        class="fa-solid fa-share-nodes me-1"></i> Share</a>
+                                <a href="#" class="text-muted small text-decoration-none"
+                                    style="color: var(--text-muted) !important;"><i class="fa-solid fa-reply me-1"></i>
+                                    Reply</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center pb-4">
-                    <button class="btn btn-outline-primary rounded-pill px-4">Load More Posts <i
-                            class="fa-solid fa-chevron-down ms-2"></i></button>
+                    <button class="btn btn-outline-primary rounded-pill px-4">Load More Popular Posts</button>
                 </div>
 
             </div>
 
             <div class="col-lg-3 d-none d-lg-block mt-5">
-
                 <div class="forum-card" style="border-top: 4px solid var(--primary-blue);">
                     <h6 class="mb-3">About Community</h6>
                     <p class="small mb-3">The number one place for Indian developers and job seekers to connect.</p>
@@ -306,7 +309,7 @@
         </div>
         <div class="offcanvas-body">
             <a href="index.html" class="sidebar-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
-            <a href="popular.html" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
+            <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
             <hr style="border-color: var(--border-color); margin: 15px 0;">
             <p class="small fw-bold text-uppercase px-3 mb-2" style="color: var(--text-muted); font-size: 0.75rem;">
                 Browse Communities</p>
@@ -350,42 +353,7 @@
         </div>
     </div>
 
-    <div class="offcanvas offcanvas-end offcanvas-custom" tabindex="-1" id="offcanvasRight">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title fw-bold" style="color: var(--brand-orange);">Trending</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="forum-card">
-                <h6 class="mb-3 text-uppercase small text-muted" style="color: var(--text-muted) !important;">Trending
-                    Tags</h6>
-                <div class="trending-item d-flex align-items-center justify-content-between">
-                    <div><span class="trending-rank">1</span><span class="fw-bold small">#Bangalore</span></div>
-                    <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
-                </div>
-                <div class="trending-item d-flex align-items-center justify-content-between">
-                    <div><span class="trending-rank">2</span><span class="fw-bold small">#TechNews</span></div>
-                    <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
-                </div>
-                <div class="trending-item d-flex align-items-center justify-content-between">
-                    <div><span class="trending-rank">3</span><span class="fw-bold small">#StockMarket</span></div>
-                    <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
     <div id="footer"></div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1200,
-            once: true
-        });
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

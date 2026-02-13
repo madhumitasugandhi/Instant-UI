@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion - Uplynk Community</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <div class="mobile-toolbar d-lg-none">
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+            <i class="fa-solid fa-bars me-1"></i> Menu
+        </button>
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+            <i class="fa-solid fa-fire me-1"></i> Related
+        </button>
+        <a href="index.html" class="btn mobile-btn active text-decoration-none">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+
+    <div class="container-fluid px-3 px-lg-5 py-4 mt-5 mt-lg-5">
+        <div class="row g-4">
+
+            <div class="col-lg-2 d-none d-lg-block">
+                <div style="position: sticky; top: 100px;">
+                    <a href="index.html" class="sidebar-nav-link text-primary fw-bold mb-3">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Feed
+                    </a>
+
+                    <a href="index.html" class="sidebar-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="popular.html" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
+                    <a href="faq.html" class="sidebar-nav-link"><i class="fa-solid fa-tags"></i> FAQs</a>
+                    
+                    <hr style="border-color: var(--border-color); margin: 15px 0;">
+                    
+                    <p class="small fw-bold text-uppercase px-3 mb-2" style="font-size: 0.75rem;">Browse Communities</p>
+                    
+                    <div class="sidebar-scroll-container">
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-comments text-primary"></i> General Discussion</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-map-marker-alt text-danger"></i> Local Community</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-hand-holding-heart text-success"></i> Advice & Support</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-laptop-code text-info"></i> Technology & Gadgets</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-house-chimney text-warning"></i> Housing</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-palette text-danger"></i> Hobbies & Interests</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-users text-primary"></i> Society & Culture</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-baby-carriage text-success"></i> Parenting & Family</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-heart-pulse text-danger"></i> Health & Wellness</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-utensils text-warning"></i> Food & Dining</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-plane text-info"></i> Travel & Lifestyle</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-primary"></i> Business</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-user-tie text-primary"></i> Career & Jobs</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 col-12">
+
+                <div class="forum-card">
+                    <div class="d-flex">
+                        <div class="vote-sidebar-vertical d-none d-md-flex">
+                            <i class="fa-solid fa-caret-up vote-btn-lg"></i>
+                            <span class="vote-count-lg">18</span>
+                            <i class="fa-solid fa-caret-down vote-btn-lg"></i>
+                            <i class="fa-regular fa-bookmark fs-5 mt-4 text-muted cursor-pointer"></i>
+                        </div>
+
+                        <div class="flex-grow-1">
+                            <div class="mb-3 d-flex align-items-center gap-2 small text-muted">
+                                <a href="index.html">Home</a> 
+                                <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i> 
+                                <a href="#">Development</a> 
+                                <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i> 
+                                <span>Laravel</span>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-3 mb-3 d-md-none">
+                                <i class="fa-solid fa-caret-up vote-btn fs-4"></i>
+                                <span class="fw-bold">18</span>
+                                <i class="fa-solid fa-caret-down vote-btn fs-4"></i>
+                            </div>
+
+                            <h1 class="thread-title">Getting 419 Page Expired on POST request even with CSRF token?</h1>
+
+                            <div class="author-box">
+                                <img src="https://randomuser.me/api/portraits/men/86.jpg" class="author-avatar">
+                                <div class="line-height-1">
+                                    <div class="fw-bold">DevRahul</div>
+                                    <small class="text-muted">Posted 2 hours ago</small>
+                                </div>
+                            </div>
+
+                            <div class="post-content">
+                                <p>I'm trying to submit a form via AJAX in Laravel 11, but I keep getting a 419 Page Expired error. I have checked my <code>verifyCsrfToken</code> middleware and everything seems fine.</p>
+                                <p>Here is my setup:</p>
+                                
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Code Screenshot" class="img-fluid rounded mb-3 border">
+
+                                <p>Is there a specific header I need to attach manually for fetch requests?</p>
+                            </div>
+
+                            <div class="mt-4 mb-3">
+                                <a href="#" class="tag-badge">#Laravel</a>
+                                <a href="#" class="tag-badge">#JavaScript</a>
+                                <a href="#" class="tag-badge">#Ajax</a>
+                            </div>
+
+                            <div class="d-flex gap-3 pt-3 border-top" style="border-color: var(--border-color) !important;">
+                                <span class="small text-muted"><i class="fa-solid fa-eye me-1"></i> 1.2k Views</span>
+                                <a href="#" class="small text-muted ms-auto"><i class="fa-solid fa-flag me-1"></i> Report</a>
+                                <a href="#" class="small text-muted"><i class="fa-solid fa-share-nodes me-1"></i> Share</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="mb-4">2 Answers</h4>
+
+                <div class="answer-accepted">
+                    <div class="accepted-badge"><i class="fa-solid fa-check me-1"></i> Best Answer</div>
+                    <div class="d-flex">
+                        <div class="vote-sidebar-vertical d-none d-md-flex">
+                            <i class="fa-solid fa-caret-up vote-btn-lg"></i>
+                            <span class="vote-count-lg text-success">42</span>
+                            <i class="fa-solid fa-caret-down vote-btn-lg"></i>
+                            <i class="fa-solid fa-check text-success fs-3 mt-3"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="author-box mb-3">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" class="author-avatar">
+                                <div>
+                                    <div class="fw-bold">Priya Sharma <span class="badge bg-primary ms-1" style="font-size: 0.6rem;">MOD</span></div>
+                                    <small class="text-muted">Answered 1 hour ago</small>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center gap-3 mb-3 d-md-none">
+                                <i class="fa-solid fa-caret-up vote-btn fs-4"></i>
+                                <span class="fw-bold text-success">42</span>
+                                <i class="fa-solid fa-caret-down vote-btn fs-4"></i>
+                            </div>
+
+                            <div class="post-content mt-2">
+                                <p>Yes, for Fetch API you need to grab the content of the meta tag and pass it in the headers as <strong>X-CSRF-TOKEN</strong>.</p>
+                                <p>Try this code:</p>
+                                <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Solution Code" class="img-fluid rounded border mb-3">
+                                <p>This should resolve the 419 error instantly.</p>
+                            </div>
+                            <div class="d-flex gap-3 pt-3 mt-3 border-top" style="border-color: var(--accepted-border) !important;">
+                                <a href="#" class="small text-muted">Reply</a>
+                                <a href="#" class="small text-muted">Share</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forum-card answer-card">
+                    <div class="d-flex">
+                        <div class="vote-sidebar-vertical d-none d-md-flex">
+                            <i class="fa-solid fa-caret-up vote-btn-lg"></i>
+                            <span class="vote-count-lg">5</span>
+                            <i class="fa-solid fa-caret-down vote-btn-lg"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="author-box mb-3">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" class="author-avatar">
+                                <div>
+                                    <div class="fw-bold">Rahul Verma</div>
+                                    <small class="text-muted">Answered 30 mins ago</small>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>Alternatively, if you are using Axios (which is default in Laravel), you don't need to do this manually. Axios handles it automatically if the meta tag exists.</p>
+                            </div>
+                            <div class="d-flex gap-3 pt-3 mt-3 border-top" style="border-color: var(--border-color) !important;">
+                                <a href="#" class="small text-muted">Reply</a>
+                                <a href="#" class="small text-muted">Share</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forum-card mt-4">
+                    <h5 class="mb-3">Your Answer</h5>
+                    <div class="rich-editor-box">
+                        <div class="editor-toolbar">
+                            <span class="editor-btn"><i class="fa-solid fa-bold"></i></span>
+                            <span class="editor-btn"><i class="fa-solid fa-italic"></i></span>
+                            <span class="editor-btn"><i class="fa-solid fa-link"></i></span>
+                            <span class="editor-btn"><i class="fa-solid fa-code"></i></span>
+                            <span class="editor-btn"><i class="fa-solid fa-image"></i></span>
+                        </div>
+                        <textarea class="editor-textarea" placeholder="Write your solution here... (Markdown supported)"></textarea>
+                    </div>
+                    <div class="mt-3 text-end">
+                        <button class="btn btn-nav-orange px-4">Post Answer</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 d-none d-lg-block mt-4">
+                <div class="forum-card" style="border-top: 4px solid var(--brand-orange);">
+                    <h6 class="mb-3">Related Questions</h6>
+                    <div class="d-flex flex-column gap-3">
+                        <a href="#">
+                            <p class="mb-1 small fw-bold" style="color: var(--primary-blue);">How to use Sanctum with SPA?</p>
+                            <small class="text-muted">24 answers</small>
+                        </a>
+                        <a href="#">
+                            <p class="mb-1 small fw-bold" style="color: var(--primary-blue);">Laravel 11 Directory Structure changes</p>
+                            <small class="text-muted">12 answers</small>
+                        </a>
+                        <a href="#">
+                            <p class="mb-1 small fw-bold" style="color: var(--primary-blue);">Best way to handle file uploads in Livewire?</p>
+                            <small class="text-muted">8 answers</small>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="forum-card">
+                    <h6 class="mb-3">Trending Tags</h6>
+                    <div class="trending-item d-flex align-items-center justify-content-between">
+                        <div><span class="trending-rank">1</span><span class="fw-bold small">#RemoteJobs</span></div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                    </div>
+                    <div class="trending-item d-flex align-items-center justify-content-between">
+                        <div><span class="trending-rank">2</span><span class="fw-bold small">#Laravel11</span></div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--primary-blue);">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="index.html" class="sidebar-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="popular.html" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
+            <hr style="border-color: var(--border-color); margin: 15px 0;">
+            <p class="small fw-bold text-uppercase px-3 mb-2" style="color: var(--text-muted);">Browse Communities</p>
+            <div class="sidebar-scroll-container">
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-comments text-primary"></i> General Discussion</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-map-marker-alt text-danger"></i> Local Community</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-hand-holding-heart text-success"></i> Advice & Support</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-laptop-code text-info"></i> Technology & Gadgets</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-house-chimney text-warning"></i> Housing</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-palette text-danger"></i> Hobbies & Interests</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-users text-primary"></i> Society & Culture</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-baby-carriage text-success"></i> Parenting & Family</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-heart-pulse text-danger"></i> Health & Wellness</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-utensils text-warning"></i> Food & Dining</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-plane text-info"></i> Travel & Lifestyle</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-primary"></i> Business</a>
+                <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-user-tie text-primary"></i> Career & Jobs</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end offcanvas-custom" tabindex="-1" id="offcanvasRight">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--brand-orange);">Related</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <h6 class="mb-3">Related Questions</h6>
+            <div class="d-flex flex-column gap-3 mb-4">
+                <a href="#">
+                    <p class="mb-1 small fw-bold" style="color: var(--primary-blue);">How to use Sanctum with SPA?</p>
+                    <small class="text-muted">24 answers</small>
+                </a>
+                <a href="#">
+                    <p class="mb-1 small fw-bold" style="color: var(--primary-blue);">Laravel 11 Directory Structure changes</p>
+                    <small class="text-muted">12 answers</small>
+                </a>
+            </div>
+            <div class="forum-card">
+                <h6 class="mb-3">Trending Tags</h6>
+                <div class="trending-item d-flex align-items-center justify-content-between">
+                    <div><span class="trending-rank">1</span><span class="fw-bold small">#RemoteJobs</span></div>
+                    <button class="btn btn-sm btn-light rounded-pill px-3">Join</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const icon = document.querySelector('#themeToggle i');
+            if(!icon) return; 
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        Promise.all([
+            fetch("header.html").then(res => res.text()).then(data => document.getElementById("navbar").innerHTML = data),
+            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("footer").innerHTML = data)
+        ]).then(() => {
+            const scrollTopBtn = document.getElementById('scroll-top');
+            if(scrollTopBtn) {
+                window.addEventListener('scroll', function () {
+                    if (window.scrollY > 300) {
+                        scrollTopBtn.classList.add('active');
+                    } else {
+                        scrollTopBtn.classList.remove('active');
+                    }
+                });
+                scrollTopBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Wizard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. MODERN THEME & VARIABLES
+           ========================================= */
+        :root {
+            --primary: #2563eb;       /* Modern Blue */
+            --primary-hover: #1d4ed8;
+            --surface: #f8fafc;       /* Clean Light Grey */
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --resume-accent: #2563eb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--surface);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- PROGRESS BAR --- */
+        .wizard-progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 1050;
+        }
+        .progress-bar-fill {
+            height: 100%; background: linear-gradient(90deg, var(--primary), #60a5fa); width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- WIZARD STEPS --- */
+        .wizard-step {
+            display: none; padding: 80px 20px 100px; max-width: 900px; margin: 0 auto;
+            opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .wizard-step.active {
+            display: block; opacity: 1; transform: translateY(0); animation: slideUpFade 0.5s forwards;
+        }
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- STEP 1: CARDS --- */
+        .selection-card {
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+        }
+        .selection-card:hover {
+            transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow-lg);
+        }
+        .selection-icon {
+            width: 70px; height: 70px; background: #eff6ff; color: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; font-size: 2rem; transition: 0.3s;
+        }
+        .selection-card:hover .selection-icon { background: var(--primary); color: white; }
+        .check-list li { margin-bottom: 8px; display: flex; align-items: flex-start; text-align: left; font-size: 0.9rem; color: var(--text-muted); }
+        .check-list i { margin-right: 10px; color: #10b981; margin-top: 3px; }
+
+        /* --- STEP 2: FORMS --- */
+        .form-section {
+            background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .form-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .form-section-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 0; }
+        .form-label { font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: var(--text-main); }
+        .form-control { border-radius: 8px; padding: 10px 14px; font-size: 0.95rem; border: 1px solid var(--border); background-color: #fff; }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+        /* --- SKILL CHIPS --- */
+        .skill-chip {
+            background: #eff6ff; color: var(--primary); padding: 6px 12px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 500; margin: 4px; display: inline-flex; align-items: center;
+            border: 1px solid rgba(37,99,235,0.2);
+        }
+        .skill-chip span { margin-left: 8px; cursor: pointer; font-weight: bold; opacity: 0.6; }
+        .skill-chip span:hover { opacity: 1; color: #dc2626; }
+
+        /* --- STEP 3: TEMPLATES --- */
+        .template-card {
+            border-radius: 12px; overflow: hidden; border: 3px solid transparent; cursor: pointer;
+            transition: all 0.3s ease; background: white; box-shadow: var(--shadow-md); position: relative;
+        }
+        .template-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .template-card.selected { border-color: var(--primary); }
+        .template-card.selected::after {
+            content: "\F272"; font-family: "bootstrap-icons"; position: absolute; top: 10px; right: 10px;
+            background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .template-preview-box { height: 250px; background: #f8fafc; display: flex; align-items: center; justify-content: center; }
+        .mini-resume { width: 120px; height: 170px; background: white; box-shadow: var(--shadow-md); padding: 8px; font-size: 3px; overflow: hidden; color: #333; }
+
+        /* --- STEP 4: PREVIEW --- */
+        .preview-wrapper { background: #525659; padding: 40px 0; min-height: 100vh; display: flex; justify-content: center; }
+        .a4-paper { background: white; width: 210mm; min-height: 297mm; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); color: #333; }
+        .action-bar { position: fixed; bottom: 30px; right: 30px; display: flex; gap: 10px; z-index: 1000; background: white; padding: 10px 20px; border-radius: 50px; box-shadow: var(--shadow-lg); }
+
+        /* --- PRINT --- */
+        @media print {
+            .wizard-progress-container, .wizard-step, .action-bar { display: none !important; }
+            .preview-wrapper { padding: 0; background: white; height: auto; display: block; }
+            .a4-paper { box-shadow: none; margin: 0; padding: 0; width: 100%; height: auto; }
+            #step-preview { display: block !important; opacity: 1 !important; }
+        }
+
+        /* --- RESUME CSS (Inside A4) --- */
+        .r-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--resume-accent); padding-bottom: 15px; margin-bottom: 20px; }
+        .r-name { font-size: 32px; font-weight: 800; text-transform: uppercase; color: #1e293b; }
+        .r-role { font-size: 16px; font-weight: 600; color: var(--resume-accent); margin-top: 4px; }
+        .r-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 1px; border-bottom: 1px solid #e2e8f0; margin: 20px 0 10px; padding-bottom: 4px; }
+        .r-item { margin-bottom: 12px; }
+        .r-item-head { display: flex; justify-content: space-between; font-weight: 700; font-size: 15px; color: #334155; }
+        .r-item-sub { font-style: italic; font-size: 13px; color: #64748b; }
+        .r-desc { font-size: 13px; line-height: 1.5; color: #475569; margin-top: 4px; }
+        .r-skills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .r-skill-tag { background: #f1f5f9; padding: 4px 8px; border-radius: 4px; font-size: 12px; color: #475569; font-weight: 500; }
+
+        /* Template Specifics */
+        .template-classic { font-family: 'Merriweather', serif; text-align: center; }
+        .template-classic .r-header { flex-direction: column; text-align: center; border-bottom: none; }
+        .template-classic .r-name { font-size: 36px; }
+        .template-classic .r-section-title { text-align: center; border-bottom: 1px solid #333; display: inline-block; color: #111; }
+        .template-classic .r-content { text-align: left; }
+    </style>
+</head>
+
+<body>
+
+    <div class="wizard-progress-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+
+    <div class="wizard-step active" id="step-1">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold mb-2">Build Your Resume</h1>
+            <p class="text-muted">Select your experience level to get started.</p>
+        </div>
+        <div class="row justify-content-center g-4">
+            <div class="col-md-5 col-lg-4">
+                <div class="selection-card" onclick="setMode('fresher')">
+                    <div class="selection-icon"><i class="bi bi-mortarboard-fill"></i></div>
+                    <h3 class="fw-bold mb-3">Fresher</h3>
+                    <ul class="list-unstyled check-list">
+                        <li><i class="bi bi-check-circle-fill"></i> Highlights Education</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Focus on Skills & Projects</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <div class="selection-card" onclick="setMode('experienced')">
+                    <div class="selection-icon"><i class="bi bi-briefcase-fill"></i></div>
+                    <h3 class="fw-bold mb-3">Experienced</h3>
+                    <ul class="list-unstyled check-list">
+                        <li><i class="bi bi-check-circle-fill"></i> Highlights Work History</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Professional Summary</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wizard-step" id="step-2">
+        <div class="container" style="max-width: 800px;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold m-0">Your Details</h3>
+                <button class="btn btn-outline-secondary btn-sm" onclick="goToStep(1)">Back</button>
+            </div>
+
+            <form id="resumeForm">
+                <div class="form-section">
+                    <div class="form-section-header">
+                        <i class="bi bi-person-circle fs-4 text-primary"></i>
+                        <h5 class="form-section-title">Personal Info</h5>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="fullName" placeholder="John Doe">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Job Title</label>
+                            <input type="text" class="form-control" name="jobTitle" placeholder="Software Engineer">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="john@example.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Phone</label>
+                            <input type="text" class="form-control" name="phone" placeholder="+1 234 567 890">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Summary</label>
+                            <textarea class="form-control" name="summary" rows="3" placeholder="Brief professional summary..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dynamicSectionContainer"></div>
+
+                <div class="form-section">
+                    <div class="form-section-header">
+                        <i class="bi bi-lightning-charge-fill fs-4 text-warning"></i>
+                        <h5 class="form-section-title">Skills</h5>
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" id="skillInput" class="form-control" placeholder="Type a skill and press Enter">
+                        <button class="btn btn-outline-primary" type="button" onclick="addSkillManual()">Add</button>
+                    </div>
+                    <div id="skillChips"></div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="button" class="btn btn-primary px-4 fw-bold" onclick="goToStep(3)">
+                        Next Step <i class="bi bi-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="wizard-step" id="step-3">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Choose Template</h2>
+            <div class="mt-3">
+                <label class="form-label fw-bold me-2">Accent Color:</label>
+                <input type="color" id="resumeColor" value="#2563eb" style="vertical-align: middle; cursor: pointer;">
+            </div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="template-card selected" onclick="selectTemplate('modern', this)">
+                    <div class="template-preview-box">
+                        <div class="mini-resume" style="font-family: sans-serif;">
+                            <div style="background:#2563eb; height:10px; width:100%; margin-bottom:5px;"></div>
+                            <div style="font-weight:bold; font-size:5px;">NAME</div>
+                            <div style="color:#2563eb; font-size:4px;">ROLE</div>
+                            <hr style="border:0.5px solid #eee; margin:3px 0;">
+                            <div style="height:2px; width:40%; background:#ccc; margin-bottom:3px;"></div>
+                            <div style="height:1px; width:100%; background:#eee; margin-bottom:1px;"></div>
+                            <div style="height:1px; width:100%; background:#eee;"></div>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center fw-bold text-muted">Modern</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="template-card" onclick="selectTemplate('classic', this)">
+                    <div class="template-preview-box">
+                        <div class="mini-resume" style="font-family: serif; text-align:center;">
+                            <div style="font-weight:bold; font-size:5px; margin-top:5px;">NAME</div>
+                            <div style="font-style:italic; font-size:4px;">Role</div>
+                            <hr style="border:0.5px solid #333; margin:4px 0;">
+                            <div style="text-align:left;">
+                                <div style="height:1px; width:100%; background:#eee; margin-bottom:2px;"></div>
+                                <div style="height:1px; width:100%; background:#eee;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center fw-bold text-muted">Classic</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3 mt-5">
+            <button class="btn btn-outline-secondary" onclick="goToStep(2)">Back</button>
+            <button class="btn btn-primary px-5 fw-bold" onclick="generateResume()">Generate Resume</button>
+        </div>
+    </div>
+
+    <div class="wizard-step p-0" id="step-preview">
+        <div class="preview-wrapper">
+            <div id="resumePaper" class="a4-paper template-modern"></div>
+        </div>
+        <div class="action-bar">
+            <button class="btn btn-outline-secondary" onclick="goToStep(1)">Back</button>
+            <button class="btn btn-light border" onclick="goToStep(3)">Change Template</button>
+            <button class="btn btn-light border" onclick="goToStep(2)">Edit Data</button>
+            <button class="btn btn-success fw-bold" onclick="window.print()"><i class="bi bi-download me-2"></i> Download</button>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA STATE ---
+        let currentStep = 1;
+        let userType = 'fresher';
+        let selectedTemplate = 'template-modern';
+        let experiences = [];
+        let educations = [];
+        let skills = [];
+
+        // --- DOM ELEMENTS ---
+        const steps = [
+            document.getElementById('step-1'),
+            document.getElementById('step-2'),
+            document.getElementById('step-3'),
+            document.getElementById('step-preview')
+        ];
+        const progressBar = document.getElementById('progressBar');
+        const dynamicContainer = document.getElementById('dynamicSectionContainer');
+        const skillInput = document.getElementById("skillInput");
+        const skillChips = document.getElementById("skillChips");
+        const colorPicker = document.getElementById("resumeColor");
+
+        // --- NAVIGATION ---
+        function goToStep(stepNumber) {
+            steps.forEach(el => el.classList.remove('active'));
+            steps[stepNumber - 1].classList.add('active');
+            progressBar.style.width = ((stepNumber) / 4) * 100 + '%';
+            window.scrollTo(0, 0);
+        }
+
+        function setMode(type) {
+            userType = type;
+            renderDynamicForms();
+            goToStep(2);
+        }
+
+        // --- DYNAMIC FORMS RENDERER ---
+        function renderDynamicForms() {
+            // Work Section Template
+            const workHtml = `
+                <div class="form-section">
+                    <div class="form-section-header">
+                        <i class="bi bi-briefcase-fill fs-4 text-success"></i>
+                        <h5 class="form-section-title">${userType === 'fresher' ? 'Internships (Optional)' : 'Work Experience'}</h5>
+                    </div>
+                    <div id="expList"></div>
+                    <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="addExperience()">
+                        <i class="bi bi-plus-lg"></i> Add Experience
+                    </button>
+                </div>`;
+
+            // Education Section Template
+            const eduHtml = `
+                <div class="form-section">
+                    <div class="form-section-header">
+                        <i class="bi bi-mortarboard-fill fs-4 text-info"></i>
+                        <h5 class="form-section-title">Education</h5>
+                    </div>
+                    <div id="eduList"></div>
+                    <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="addEducation()">
+                        <i class="bi bi-plus-lg"></i> Add Education
+                    </button>
+                </div>`;
+
+            // Order Logic
+            if (userType === 'fresher') {
+                dynamicContainer.innerHTML = eduHtml + workHtml;
+            } else {
+                dynamicContainer.innerHTML = workHtml + eduHtml;
+            }
+
+            // Initialize Empty Fields
+            if(experiences.length === 0) addExperience();
+            if(educations.length === 0) addEducation();
+            
+            // Re-render if switching back
+            renderExperienceFields();
+            renderEducationFields();
+        }
+
+        // --- EXPERIENCE LOGIC ---
+        function addExperience() {
+            experiences.push({ company: '', role: '', date: '', desc: '' });
+            renderExperienceFields();
+        }
+
+        function removeExperience(index) {
+            experiences.splice(index, 1);
+            renderExperienceFields();
+        }
+
+        function renderExperienceFields() {
+            const container = document.getElementById('expList');
+            if(!container) return;
+            container.innerHTML = experiences.map((exp, i) => `
+                <div class="mb-3 pb-3 border-bottom position-relative">
+                    <button type="button" class="btn-close position-absolute top-0 end-0" onclick="removeExperience(${i})" style="font-size:0.7rem;"></button>
+                    <div class="row g-2">
+                        <div class="col-md-6"><input class="form-control" placeholder="Company Name" value="${exp.company}" oninput="experiences[${i}].company=this.value"></div>
+                        <div class="col-md-6"><input class="form-control" placeholder="Job Title" value="${exp.role}" oninput="experiences[${i}].role=this.value"></div>
+                        <div class="col-12"><input class="form-control" placeholder="Duration (e.g. 2020 - Present)" value="${exp.date}" oninput="experiences[${i}].date=this.value"></div>
+                        <div class="col-12"><textarea class="form-control" rows="2" placeholder="Description..." oninput="experiences[${i}].desc=this.value">${exp.desc}</textarea></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- EDUCATION LOGIC ---
+        function addEducation() {
+            educations.push({ school: '', degree: '', year: '' });
+            renderEducationFields();
+        }
+
+        function removeEducation(index) {
+            educations.splice(index, 1);
+            renderEducationFields();
+        }
+
+        function renderEducationFields() {
+            const container = document.getElementById('eduList');
+            if(!container) return;
+            container.innerHTML = educations.map((edu, i) => `
+                <div class="mb-3 pb-3 border-bottom position-relative">
+                    <button type="button" class="btn-close position-absolute top-0 end-0" onclick="removeEducation(${i})" style="font-size:0.7rem;"></button>
+                    <div class="row g-2">
+                        <div class="col-12"><input class="form-control" placeholder="School / University" value="${edu.school}" oninput="educations[${i}].school=this.value"></div>
+                        <div class="col-md-8"><input class="form-control" placeholder="Degree" value="${edu.degree}" oninput="educations[${i}].degree=this.value"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Year" value="${edu.year}" oninput="educations[${i}].year=this.value"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- SKILL LOGIC ---
+        function addSkillManual() {
+            const val = skillInput.value.trim();
+            if(val) {
+                skills.push(val);
+                skillInput.value = '';
+                renderSkills();
+            }
+        }
+
+        skillInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addSkillManual();
+            }
+        });
+
+        function removeSkill(index) {
+            skills.splice(index, 1);
+            renderSkills();
+        }
+
+        function renderSkills() {
+            skillChips.innerHTML = skills.map((s, i) => 
+                `<span class="skill-chip">${s}<span onclick="removeSkill(${i})">×</span></span>`
+            ).join('');
+        }
+
+        // --- TEMPLATE & COLOR ---
+        if(colorPicker) {
+            colorPicker.addEventListener("input", e => {
+                document.documentElement.style.setProperty("--resume-accent", e.target.value);
+            });
+        }
+
+        function selectTemplate(name, element) {
+            selectedTemplate = 'template-' + name;
+            document.querySelectorAll('.template-card').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        // --- GENERATE RESUME ---
+        function generateResume() {
+            const formData = new FormData(document.getElementById('resumeForm'));
+            const data = Object.fromEntries(formData.entries());
+            const paper = document.getElementById('resumePaper');
+
+            paper.className = `a4-paper ${selectedTemplate}`;
+
+            // Header
+            const header = `
+                <div class="r-header">
+                    <div>
+                        <div class="r-name">${data.fullName || 'YOUR NAME'}</div>
+                        <div class="r-role">${data.jobTitle || 'Job Title'}</div>
+                    </div>
+                    <div style="text-align:right; font-size:14px; color:#555;">
+                        <div>${data.email}</div>
+                        <div>${data.phone}</div>
+                    </div>
+                </div>`;
+
+            // Summary
+            const summary = data.summary ? `
+                <div class="r-section">
+                    <div class="r-section-title">Summary</div>
+                    <div class="r-desc">${data.summary}</div>
+                </div>` : '';
+
+            // Exp HTML
+            const expHTML = experiences.filter(e => e.company).map(e => `
+                <div class="r-item">
+                    <div class="r-item-head">
+                        <span>${e.company} - ${e.role}</span>
+                        <span>${e.date}</span>
+                    </div>
+                    <div class="r-desc">${e.desc}</div>
+                </div>`).join('');
+            
+            const experienceSection = expHTML ? `
+                <div class="r-section">
+                    <div class="r-section-title">${userType === 'fresher' ? 'Internships' : 'Experience'}</div>
+                    ${expHTML}
+                </div>` : '';
+
+            // Edu HTML
+            const eduHTML = educations.filter(e => e.school).map(e => `
+                <div class="r-item">
+                    <div class="r-item-head">
+                        <span>${e.school}</span>
+                        <span>${e.year}</span>
+                    </div>
+                    <div class="r-item-sub">${e.degree}</div>
+                </div>`).join('');
+
+            const eduSection = eduHTML ? `
+                <div class="r-section">
+                    <div class="r-section-title">Education</div>
+                    ${eduHTML}
+                </div>` : '';
+
+            // Skills HTML
+            const skillHTML = skills.length ? `
+                <div class="r-section">
+                    <div class="r-section-title">Skills</div>
+                    <div class="r-skills">
+                        ${skills.map(s => `<span class="r-skill-tag">${s}</span>`).join('')}
+                    </div>
+                </div>` : '';
+
+            // Assemble
+            let body = userType === 'fresher' 
+                ? summary + eduSection + experienceSection + skillHTML
+                : summary + experienceSection + eduSection + skillHTML;
+
+            paper.innerHTML = header + '<div class="r-content">' + body + '</div>';
+            goToStep(4);
+        }
+    </script>
+</body>
+</html>

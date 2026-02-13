@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a Discussion - Uplynk Community</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- SCOPED STYLES --- */
+
+        /* Layout Tweaks */
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        /* Form Elements */
+        .forum-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .custom-label {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .custom-input,
+        .custom-select {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .custom-input:focus,
+        .custom-select:focus {
+            border-color: var(--primary-blue);
+            background-color: var(--bg-color);
+        }
+
+        .helper-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Editor */
+        .editor-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .editor-toolbar {
+            background-color: var(--surface-color);
+            padding: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .toolbar-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--text-main);
+        }
+
+        .editor-area {
+            width: 100%;
+            min-height: 250px;
+            padding: 15px;
+            border: none;
+            resize: vertical;
+            outline: none;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        /* Right Sidebar (History) */
+        .history-item {
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item:hover {
+            color: var(--primary-blue);
+            transform: translateX(3px);
+        }
+
+        .history-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .status-draft {
+            color: var(--brand-orange);
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        /* Mobile */
+        .mobile-toolbar {
+            display: none;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 15px;
+            position: sticky;
+            top: 60px;
+            z-index: 990;
+        }
+
+        .mobile-btn {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 991px) {
+            .mobile-toolbar {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <div class="mobile-toolbar d-lg-none">
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+            <i class="fa-solid fa-bars me-1"></i> Menu
+        </button>
+        <button class="btn mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+            <i class="fa-solid fa-clock-rotate-left me-1"></i> History
+        </button>
+    </div>
+
+    <div class="container-fluid px-lg-5 py-4 mt-5">
+        <div class="row g-4">
+
+            <div class="col-lg-2 d-none d-lg-block">
+                <div style="position: sticky; top: 100px;">
+                    <a href="index.html" class="sidebar-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="popular.html" class="sidebar-nav-link"><i class="fa-solid fa-fire"></i> Popular</a>
+                    <a href="faq.html" class="sidebar-nav-link active"><i class="fa-solid fa-tags"></i>Question & Answers</a>
+
+                    <hr style="border-color: var(--border-color); margin: 15px 0;">
+
+                    <p class="small fw-bold text-uppercase px-3 mb-2"
+                        style="color: var(--text-muted); font-size: 0.75rem;">Browse Communities</p>
+
+                    <div class="sidebar-scroll-container">
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-comments text-primary"></i> General
+                            Discussion</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-map-marker-alt text-danger"></i>
+                            Local Community</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-hand-holding-heart text-success"></i>
+                            Advice & Support</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-laptop-code text-info"></i>
+                            Technology & Gadgets</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-house-chimney text-warning"></i>
+                            Housing</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-palette text-danger"></i> Hobbies &
+                            Interests</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-users text-primary"></i> Society &
+                            Culture</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-baby-carriage text-success"></i>
+                            Parenting & Family</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-heart-pulse text-danger"></i> Health
+                            & Wellness</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-utensils text-warning"></i> Food &
+                            Dining</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-plane text-info"></i> Travel &
+                            Lifestyle</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-briefcase text-primary"></i>
+                            Business</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-shirt text-danger"></i> Fashion &
+                            Beauty</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-film text-warning"></i>
+                            Entertainment</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-dumbbell text-success"></i> Sports &
+                            Fitness</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-music text-info"></i> Music & Art</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-gamepad text-primary"></i> Gaming &
+                            eSports</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-paw text-warning"></i> Pet Lovers</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-leaf text-success"></i>
+                            Environment</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-user-tie text-primary"></i> Career &
+                            Jobs</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-graduation-cap text-danger"></i>
+                            Education</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-coins text-warning"></i> Finance</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-scale-balanced text-info"></i>
+                            Legal</a>
+                        <a href="#" class="sidebar-nav-link"><i class="fa-solid fa-bullhorn text-muted"></i> Site
+                            Feedback</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <h2 class="page-title mt-4">Have doubts ask here</h2>
+
+                <form action="#" method="POST">
+                    <div class="forum-card">
+
+                        <div class="mb-4">
+                            <label class="custom-label">Discussion Title <span class="text-danger">*</span></label>
+                            <input type="text" class="custom-input"
+                                placeholder="e.g. How do I fix the 419 error in Laravel 11?">
+                            <p class="helper-text">Be specific and imagine you’re asking a question to another person.
+                            </p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="custom-label">Body <span class="text-danger">*</span></label>
+                            <div class="editor-container">
+                                <div class="editor-toolbar">
+                                    <button type="button" class="toolbar-btn" title="Bold"><i
+                                            class="fa-solid fa-bold"></i></button>
+                                    <button type="button" class="toolbar-btn" title="Italic"><i
+                                            class="fa-solid fa-italic"></i></button>
+                                    <div style="width: 1px; background: var(--border-color); margin: 0 5px;"></div>
+                                    <button type="button" class="toolbar-btn" title="Link"><i
+                                            class="fa-solid fa-link"></i></button>
+                                    <button type="button" class="toolbar-btn" title="Image"><i
+                                            class="fa-regular fa-image"></i></button>
+                                    <button type="button" class="toolbar-btn" title="Code Block"><i
+                                            class="fa-solid fa-code"></i></button>
+                                    <div style="width: 1px; background: var(--border-color); margin: 0 5px;"></div>
+                                    <button type="button" class="toolbar-btn" title="List"><i
+                                            class="fa-solid fa-list-ul"></i></button>
+                                </div>
+                                <textarea class="editor-area"
+                                    placeholder="Include all the information someone would need to answer your question..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="custom-label">Tags</label>
+                            <input type="text" class="custom-input" placeholder="e.g. #php, #api, #error">
+                            <p class="helper-text">Add up to 5 tags to describe what your question is about.</p>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-3 pt-2">
+                            <a href="index.html" class="btn btn-link text-decoration-none"
+                                style="color: var(--text-muted); align-self: center;">Cancel</a>
+                            <button type="submit" class="btn btn-nav-orange px-4 py-2 text-white fw-bold">Post
+                                Discussion</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-3 d-none d-lg-block mt-5">
+
+                <div class="forum-card" style="border-top: 4px solid var(--primary-blue);">
+                    <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2"
+                        style="border-color: var(--border-color)!important;">
+                        <h6 class="fw-bold m-0" style="color: var(--text-main);">My History</h6>
+                        <a href="#" style="font-size: 0.8rem; color: var(--primary-blue); text-decoration: none;">View
+                            All</a>
+                    </div>
+
+                    <div class="d-flex flex-column gap-1">
+                        <a href="#" class="history-item">
+                            <div class="text-truncate fw-bold" style="font-size: 0.9rem;">Deploying React App to VPS
+                            </div>
+                            <div class="history-meta"><span class="status-draft">Draft</span> • Edited 2m ago</div>
+                        </a>
+
+                        <a href="#" class="history-item">
+                            <div class="text-truncate fw-bold" style="font-size: 0.9rem;">Laravel 11 Middleware Issues
+                            </div>
+                            <div class="history-meta">Posted 2 days ago • 5 replies</div>
+                        </a>
+
+                        <a href="#" class="history-item">
+                            <div class="text-truncate fw-bold" style="font-size: 0.9rem;">Best VS Code Extensions 2026
+                            </div>
+                            <div class="history-meta">Posted 1 week ago • 12 replies</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="forum-card"
+                    style="background-color: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.2);">
+                    <h6 class="fw-bold mb-3" style="color: var(--primary-blue);"><i
+                            class="fa-solid fa-circle-info me-2"></i> Posting Tips</h6>
+                    <ul class="ps-3 mb-0 small text-muted" style="line-height: 1.6;">
+                        <li>Be specific in your title.</li>
+                        <li>Include code snippets if technical.</li>
+                        <li>Check for duplicates before posting.</li>
+                        <li>Be respectful to others.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--primary-blue);">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="index.html" class="d-block py-2 text-decoration-none text-muted">Home</a>
+            <a href="create-thread.html" class="d-block py-2 text-decoration-none text-primary fw-bold">Start
+                Discussion</a>
+            <hr>
+            <p class="small text-muted fw-bold">MY COMMUNITIES</p>
+            <a href="#" class="d-block py-1 text-muted text-decoration-none">r/Laravel</a>
+            <a href="#" class="d-block py-1 text-muted text-decoration-none">r/ReactJS</a>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end offcanvas-custom" tabindex="-1" id="offcanvasRight">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold">My History</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="forum-card">
+                <h6 class="fw-bold mb-3">Recent Posts</h6>
+                <a href="#" class="history-item">
+                    <div class="text-truncate fw-bold">Deploying React App</div>
+                    <div class="history-meta"><span class="status-draft">Draft</span> • 2m ago</div>
+                </a>
+                <a href="#" class="history-item">
+                    <div class="text-truncate fw-bold">Laravel Middleware</div>
+                    <div class="history-meta">Posted 2 days ago</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        fetch("header.html").then(res => res.text()).then(data => document.getElementById("navbar").innerHTML = data);
+        fetch("footer.html").then(res => res.text()).then(data => document.getElementById("footer").innerHTML = data);
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const icon = document.querySelector('#themeToggle i');
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                if (icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+            } else {
+                html.setAttribute('data-theme', 'light');
+                if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+            }
+        }
+    </script>
+</body>
+
+</html>
