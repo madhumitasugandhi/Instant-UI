@@ -902,6 +902,20 @@ body {
 }
 
 /*------------------Community Page Specific Styles------------------*/
+
+body {
+    /* Ensure body background matches the theme */
+    background-color: var(--bg-body-forum, #f3f4f6);
+}
+
+.forum-card {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    /* FIX: Changed from --card-bg to --bg-color to match your system */
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
 .post-action-link {
     text-decoration: none;
     color: var(--text-muted) !important;
@@ -912,17 +926,28 @@ body {
     gap: 6px;
     padding: 5px 8px;
     border-radius: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .post-action-link:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--surface-color);
     color: var(--primary-blue) !important;
 }
 
-[data-theme="dark"] .post-action-link:hover {
-    background: rgba(255, 255, 255, 0.1);
+.like-btn.active {
+    color: #2EB872 !important;
 }
 
+.dislike-btn.active {
+    color: #e74c3c !important;
+}
+
+.save-btn.active {
+    color: var(--brand-orange) !important;
+}
+x
 .like-btn.active {
     color: #2EB872 !important;
 }
@@ -1297,6 +1322,10 @@ body {
         display: flex;
     }
 
+    .resources-hero {
+        margin-bottom: 0px;
+    }
+
     .offcanvas-custom {
         background-color: var(--bg-color);
         color: var(--text-main);
@@ -1322,6 +1351,7 @@ body {
 @media (max-width: 576px) {
     .resources-hero {
         padding: 50px 0;
+        margin-bottom: 0px;
     }
 
     .resources-hero h1 {
